@@ -1,0 +1,17 @@
+.categoryFilter {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.categoryFilter div {
+    display: flex;
+    color: white;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.categoryFilter div.selected {
+    border-bottom: 5px  #F65261 solid;
+}
+

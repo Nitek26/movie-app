@@ -1,7 +1,7 @@
 import React from 'react';
-import MovieContainer from './movies/movieContainer';
-import MovieFooter from './movies/movieFooter';
-import MovieHeader from './movies/movieHeader';
+import MovieContainer from './content/movieContainer';
+import MovieFooter from './footer/movieFooter';
+import MovieHeader from './header/movieHeader';
 
 import './App.css';
 
