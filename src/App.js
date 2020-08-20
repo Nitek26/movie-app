@@ -1,18 +1,16 @@
 import React from 'react';
-import HelloWorldFromCreateElement from './hellos/helloWorldFromCreateElement';
-import HelloWorldFromComponent from './hellos/helloWorldFromComponent';
-import HelloWorldFromPureComponent from './hellos/helloWorldFromPureComponent';
-import HelloWorldFromFunctionalComponent from './hellos/helloWorldFromFunctionalComponent';
+import MovieContainer from './movies/movieContainer';
+import MovieFooter from './movies/movieFooter';
+import MovieHeader from './movies/movieHeader';
 
 import './App.css';
 
 function App() {
   return (
-  <div>
-    {HelloWorldFromCreateElement}
-    <HelloWorldFromComponent />
-    <HelloWorldFromPureComponent />
-    <HelloWorldFromFunctionalComponent />
+  <div className="app">
+    <MovieHeader />
+    <MovieContainer />
+    <MovieFooter />
   </div>
   );
 }
