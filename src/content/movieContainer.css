@@ -9,12 +9,23 @@
     grid-auto-rows: minmax(50px, auto);
 }
 
-.movieContainer .searchCount{
+.movieContainer .searchCount {
     color: white;
     font-size: 1.2em;
     padding-top: 10px;
 }
 
-.movieContainer .searchCount span{
+.movieContainer .searchCount span {
     font-weight: bold;
+}
+
+.movieContainer .searchResults {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 10px;
+}
+
+.movieContainer .searchResults img {
+    max-width: 100%;
 }
