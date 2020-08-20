@@ -5,10 +5,19 @@
 }
 
 .searchSorter div {
-    display: flex;
-    color: white;
+    color: #555555;
     font-size: 1.2em;
     text-transform: uppercase;
     margin-right: 20px;
     padding-top: 10px;
+}
+
+.searchSorter select {
+    color: white;
+    background-color: #232323;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    margin-right: 20px;
+    border: none;
+    font-weight: 100;
 }
