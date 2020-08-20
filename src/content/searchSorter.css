@@ -1,0 +1,14 @@
+.searchSorter {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 30px;
+}
+
+.searchSorter div {
+    display: flex;
+    color: white;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    margin-right: 20px;
+    padding-top: 10px;
+}

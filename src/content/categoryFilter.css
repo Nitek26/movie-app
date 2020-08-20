@@ -9,9 +9,9 @@
     font-size: 1.2em;
     text-transform: uppercase;
     cursor: pointer;
+    padding-top: 10px;
 }
 
 .categoryFilter div.selected {
     border-bottom: 5px  #F65261 solid;
 }
-
