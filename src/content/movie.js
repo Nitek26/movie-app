@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 
 import './movie.css';
 
-class Movie extends React.Component {
-    render() {
+const Movie = (props) =>  {
         return (
             <div className="movie">
-                <img src={this.props.poster_path} alt={`${this.props.title} poster`}></img>
+                <img src={props.poster_path} alt={`${props.title} poster`}></img>
                 <br/>
-                <span className="title">{this.props.title}</span>
-                <span className="release_date">{this.props.release_date.getFullYear()}</span>
+                <span className="title">{props.title}</span>
+                <span className="release_date">{props.release_date.getFullYear()}</span>
                 <br />
-                <span className="genres">{this.props.genres.join(', ')}</span>
+                <span className="genres">{props.genres.join(', ')}</span>
             </div>)
-    }
 }
 
 Movie.propTypes = {
