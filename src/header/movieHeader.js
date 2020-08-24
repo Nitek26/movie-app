@@ -8,7 +8,6 @@ class MovieHeader extends React.Component{
             <div className="movieHeader">
                 <img src="logo.png" alt="Application logo"></img>
                 <div className="addMovieContainer"><button >+ Add movie</button></div>
-
                 <div className="headerText">
                     Find your movie
                 </div>
