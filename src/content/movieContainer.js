@@ -119,8 +119,13 @@ class MovieContainer extends React.Component {
                 ],
                 "runtime": 140
             }
-        ]
+        ],
+        modalOpened: false
     };
+
+    toggleModal = () => {
+        this.setState({modalOpened: !this.state.modalOpened});
+    }
 
     render(){
         return (
@@ -138,9 +143,11 @@ class MovieContainer extends React.Component {
                         <Movie 
                             key={movie.id}
                             title={movie.title} 
-                            poster_path={movie.poster_path} 
-                            release_date={new Date(movie.release_date)} 
-                            genres={movie.genres} />
+                            posterPath={movie.poster_path} 
+                            releaseDate={new Date(movie.release_date)} 
+                            genres={movie.genres}
+                            toggleModal={this.toggleModal}
+                            modalOpened={this.state.modalOpened} />
                         );
                 })}
                 </div>

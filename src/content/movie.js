@@ -6,11 +6,16 @@ import './movie.css';
 const Movie = (props) =>  {
         return (
             <div className="movie">
-                <img src={props.poster_path} alt={`${props.title} poster`}></img>
-                <button className="action_button">...</button>
+                <img src={props.posterPath} alt={`${props.title} poster`}></img>
+                <button className="action_button" onClick={props.toggleModal}>...</button>
+                <div className={"actions " + (props.modalOpened ? "opened" : null)}>
+                    <span className="close" onClick={props.toggleModal}>X</span>
+                    <span className="action">Edit</span>
+                    <span className="action">Delete</span>
+                </div>
                 <br/>
                 <span className="title">{props.title}</span>
-                <span className="release_date">{props.release_date.getFullYear()}</span>
+                <span className="release_date">{props.releaseDate.getFullYear()}</span>
                 <br />
                 <span className="genres">{props.genres.join(', ')}</span>
             </div>)
@@ -19,8 +24,9 @@ const Movie = (props) =>  {
 Movie.propTypes = {
     title: PropTypes.string,
     genres: PropTypes.array,
-    poster_path: PropTypes.string,
-    release_date: PropTypes.instanceOf(Date)
+    posterPath: PropTypes.string,
+    releaseDate: PropTypes.instanceOf(Date),
+    toggleModal: PropTypes.func
   };
 
 export default Movie;
