@@ -1,12 +1,13 @@
 .movie {
     color: #555555;
+    position: relative;
 }
 
-.movie .title{
+.movie .title {
     font-size: 1.2em;
 }
 
-.movie .release_date{
+.movie .release_date {
     border: 2px #555555 solid;
     float: right;
     padding: 2px 10px;
@@ -16,4 +17,32 @@
 .movie img {
     max-width: 100%;
     width: 100%;
+}
+
+.movie img:hover + .action_button {
+    display: initial;
+}
+
+.movie .action_button {
+    border-radius: 50%;
+    background-color: #232323;
+    border: none;
+    color: #555555;
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    display: none;
+    width: 50px;
+    height: 50px;
+}
+
+.movie .action_button:focus {
+    outline: none;
+}
+
+.movie .action_button:hover {
+    display: initial;
 }

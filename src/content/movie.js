@@ -7,6 +7,7 @@ const Movie = (props) =>  {
         return (
             <div className="movie">
                 <img src={props.poster_path} alt={`${props.title} poster`}></img>
+                <button className="action_button">...</button>
                 <br/>
                 <span className="title">{props.title}</span>
                 <span className="release_date">{props.release_date.getFullYear()}</span>
