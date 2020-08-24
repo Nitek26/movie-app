@@ -120,11 +120,14 @@ class MovieContainer extends React.Component {
                 "runtime": 140
             }
         ],
-        modalOpened: false
+        modalOpened: []
     };
 
-    toggleModal = () => {
-        this.setState({modalOpened: !this.state.modalOpened});
+    toggleModal = (id) => {
+        let currentState = this.state.modalOpened;
+        const newState = currentState.includes(id) ? currentState.filter(i => i !== id) : [ ...currentState, id ]
+
+        this.setState({modalOpened: newState});
     }
 
     render(){
@@ -142,12 +145,13 @@ class MovieContainer extends React.Component {
                     return (
                         <Movie 
                             key={movie.id}
+                            id={movie.id}
                             title={movie.title} 
                             posterPath={movie.poster_path} 
                             releaseDate={new Date(movie.release_date)} 
                             genres={movie.genres}
                             toggleModal={this.toggleModal}
-                            modalOpened={this.state.modalOpened} />
+                            modalOpened={this.state.modalOpened.includes(movie.id)} />
                         );
                 })}
                 </div>

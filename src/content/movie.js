@@ -7,9 +7,9 @@ const Movie = (props) =>  {
         return (
             <div className="movie">
                 <img src={props.posterPath} alt={`${props.title} poster`}></img>
-                <button className="action_button" onClick={props.toggleModal}>...</button>
+                <button className="action_button" onClick={() => props.toggleModal(props.id)}>...</button>
                 <div className={"actions " + (props.modalOpened ? "opened" : null)}>
-                    <span className="close" onClick={props.toggleModal}>X</span>
+                    <span className="close" onClick={() => props.toggleModal(props.id)}>X</span>
                     <span className="action">Edit</span>
                     <span className="action">Delete</span>
                 </div>
