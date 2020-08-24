@@ -26,7 +26,9 @@ Movie.propTypes = {
     genres: PropTypes.array,
     posterPath: PropTypes.string,
     releaseDate: PropTypes.instanceOf(Date),
-    toggleModal: PropTypes.func
+    toggleModal: PropTypes.func,
+    id: PropTypes.number,
+    modalOpened: PropTypes.bool
   };
 
 export default Movie;
