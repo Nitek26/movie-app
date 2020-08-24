@@ -2,6 +2,7 @@ import React from 'react';
 
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
+import Movie from './movie';
 
 import './movieContainer.css';
 
@@ -134,7 +135,12 @@ class MovieContainer extends React.Component {
                 <div className="searchResults">
                 {this.state.movies.map(movie=>{
                     return (
-                        <div className="movie"><img src={movie.poster_path} alt={`${movie.title} poster`}></img></div>
+                        <Movie 
+                            key={movie.id}
+                            title={movie.title} 
+                            poster_path={movie.poster_path} 
+                            release_date={movie.release_date} 
+                            genres={movie.genres} />
                         );
                 })}
                 </div>

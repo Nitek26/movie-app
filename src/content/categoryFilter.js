@@ -18,7 +18,7 @@ class CategoryFilter extends React.Component{
         return (
             <div className="categoryFilter">
                 {this.state.options.map(option=>{
-                    return <div onClick={e => this.setState({ filter: option})} className={this.state.filter === option ? 'selected' : null}>{option}</div>
+                    return <div key={option} onClick={e => this.setState({ filter: option})} className={this.state.filter === option ? 'selected' : null}>{option}</div>
                 })}
             </div>
             );

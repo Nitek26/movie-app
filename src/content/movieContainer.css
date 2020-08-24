@@ -25,7 +25,3 @@
     grid-auto-rows: minmax(200px, auto);
     gap: 10px;
 }
-
-.movieContainer .searchResults img {
-    max-width: 100%;
-}
