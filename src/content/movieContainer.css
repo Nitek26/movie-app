@@ -1,6 +1,6 @@
 .movieContainer {
     background-color: #232323;
-    padding: 0 40px;
+    padding: 0 40px 10px 40px;
 }
 
 .movieContainer .filters {

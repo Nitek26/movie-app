@@ -7,10 +7,11 @@ class Movie extends React.Component {
         return (
             <div className="movie">
                 <img src={this.props.poster_path} alt={`${this.props.title} poster`}></img>
-                <span>{this.props.title}</span>
-                <span>{this.props.release_date}</span>
-                <span>{this.props.genres}</span>
-
+                <br/>
+                <span className="title">{this.props.title}</span>
+                <span className="release_date">{new Date(this.props.release_date).getFullYear()}</span>
+                <br />
+                <span className="genres">{this.props.genres.join(', ')}</span>
             </div>)
     }
 }
