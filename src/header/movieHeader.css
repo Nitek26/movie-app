@@ -20,6 +20,7 @@
     padding: 10px 20px;
     color: #F65261;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .headerText{

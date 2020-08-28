@@ -17,7 +17,8 @@ const AddEditModal = (props) => {
         "Romance"
     ];
 
-    let movie = props.movie;
+    const movie = props.movie;
+    const isEditMode = !!props.movie.id;
 
     const reset = () => {
         console.log('reset cliked');
@@ -28,12 +29,11 @@ const AddEditModal = (props) => {
         <div className={'addEditContainer' + (props.isVisible ? ' visible' : '')}>
             <div className="addEditModal">
                 <button className="close" onClick={() => props.toggleModal()}>X</button>
-                <div className="header">edit movie</div>
+                <div className="header">{isEditMode ? 'edit' : 'add'} movie</div>
                 <div className="body">
-                    <label> movie id
+                    {isEditMode ? (<label> movie id
                         <input type="text" name="id" defaultValue={movie.id} disabled="disabled" />
-                    </label>
-                    
+                    </label>) : ''}
                     <label> title
                         <input type="text" name="title" defaultValue={movie.title} />
                     </label>
@@ -65,7 +65,7 @@ const AddEditModal = (props) => {
                 </div>
                 <div className="buttons">
                     <button className="reset" onClick={() => reset()}>reset</button>
-                    <button className="confirm" onClick={() => props.toggleModal()}>save</button>
+                    <button className="confirm" onClick={() => props.toggleModal()}>{isEditMode ? 'save' : 'submit'}</button>
                 </div>
 
             </div>
