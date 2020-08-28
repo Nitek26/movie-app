@@ -1,5 +1,5 @@
 .deleteConfirmation {
-    z-index: 1000;
+    z-index: 100;
     background-color: #23232370;
     position: fixed;
     top: 0px;
@@ -11,4 +11,51 @@
 
 .deleteConfirmation.visible {
     display: block;
+}
+
+.deleteConfirmation .confirmModal {
+    background-color: #232323;
+    margin: 200px auto 0 auto;
+    width: 600px;
+    padding: 20px 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.deleteConfirmation .confirmModal .close {
+    color:white;
+    background-color: #232323;
+    border-style: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.deleteConfirmation .confirmModal .header {
+    font-size: 2em;
+    text-transform: uppercase;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.deleteConfirmation .confirmModal .body {
+    font-size: 1.2em;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.deleteConfirmation .confirmModal .confirm {
+    background-color: #F65261;
+    border-style: none;
+    border-radius: 4px;
+    color:white;
+    font-size: 1.5em;
+    padding: 20px 100px;
+    text-transform: uppercase;
+    align-self: flex-end;
+    margin-right: 20px;
+    margin-top: 20px;
+    cursor: pointer;
 }

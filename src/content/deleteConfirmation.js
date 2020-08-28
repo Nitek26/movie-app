@@ -8,10 +8,10 @@ class DeleteConfirmation extends React.Component {
         return (
             <div className={'deleteConfirmation' + (this.props.isVisible ? ' visible' : '')}>
                 <div className="confirmModal">
-                    <div className="close" onClick={() => this.props.toggleConfirmDeleteModal(null)}>X</div>
-                    <div>delete movie</div>
-                    <div>Are you sure you want to delete this movie?</div>
-                    <button onClick={() => this.props.toggleConfirmDeleteModal(null)}>confirm</button>
+                    <button className="close" onClick={() => this.props.toggleConfirmDeleteModal(null)}>X</button>
+                    <div className="header">delete movie</div>
+                    <div className="body">Are you sure you want to delete this movie?</div>
+                    <button className="confirm" onClick={() => this.props.toggleConfirmDeleteModal(null)}>confirm</button>
                 </div>
             </div>
         );
