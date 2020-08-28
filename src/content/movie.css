@@ -7,7 +7,7 @@
     font-size: 1.2em;
 }
 
-.movie .release_date {
+.movie .releaseDate {
     border: 2px #555555 solid;
     float: right;
     padding: 2px 10px;
@@ -19,11 +19,11 @@
     width: 100%;
 }
 
-.movie img:hover + .action_button {
+.movie img:hover + .actionButton {
     display: initial;
 }
 
-.movie .action_button {
+.movie .actionButton {
     border-radius: 50%;
     background-color: #232323;
     border: none;
@@ -43,11 +43,11 @@
     cursor: pointer;
 }
 
-.movie .action_button:focus {
+.movie .actionButton:focus {
     outline: none;
 }
 
-.movie .action_button:hover {
+.movie .actionButton:hover {
     display: initial;
 }
 

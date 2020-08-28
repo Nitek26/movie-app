@@ -8,7 +8,7 @@ const Movie = (props) => {
     return (
         <div className="movie">
             <img src={props.posterPath} alt={`${props.title} poster`}></img>
-            <button className="action_button" onClick={() => props.toggleDropdownModal(props.id)}>...</button>
+            <button className="actionButton" onClick={() => props.toggleDropdownModal(props.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
                 <span className="close" onClick={() => props.toggleDropdownModal(props.id)}>X</span>
                 <span className="action">Edit</span>
@@ -16,7 +16,7 @@ const Movie = (props) => {
             </div>
             <br />
             <span className="title">{props.title}</span>
-            <span className="release_date">{props.releaseDate.getFullYear()}</span>
+            <span className="releaseDate">{props.releaseDate.getFullYear()}</span>
             <br />
             <span className="genres">{props.genres.join(', ')}</span>
         </div>
