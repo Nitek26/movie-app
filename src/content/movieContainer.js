@@ -3,8 +3,8 @@ import React from 'react';
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
 import Movie from './movie';
-import DeleteConfirmation from './deleteConfirmation';
-import AddEditModal from './addEditModal';
+import DeleteConfirmation from '../modals/deleteConfirmation';
+import AddEditModal from '../modals/addEditModal';
 
 import './movieContainer.css';
 
