@@ -3,6 +3,7 @@ import React from 'react';
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
 import Movie from './movie';
+import DeleteConfirmation from './deleteConfirmation'
 
 import './movieContainer.css';
 
@@ -120,14 +121,23 @@ class MovieContainer extends React.Component {
                 "runtime": 140
             }
         ],
-        modalOpened: []
+        modalOpened: [],
+        confirmModalShown: false,
+        confirmModalId: null
     };
 
-    toggleModal = (id) => {
+    toggleDropdownModal = (id) => {
         let currentState = this.state.modalOpened;
         const newState = currentState.includes(id) ? currentState.filter(i => i !== id) : [ ...currentState, id ]
 
         this.setState({modalOpened: newState});
+    }
+
+    toggleConfirmDeleteModal = (id) => {
+        this.setState({
+            confirmModalShown: !this.state.confirmModalShown,
+            confirmModalId: id
+        });
     }
 
     render(){
@@ -150,11 +160,13 @@ class MovieContainer extends React.Component {
                             posterPath={movie.poster_path} 
                             releaseDate={new Date(movie.release_date)} 
                             genres={movie.genres}
-                            toggleModal={this.toggleModal}
+                            toggleDropdownModal={this.toggleDropdownModal}
+                            toggleConfirmDeleteModal={this.toggleConfirmDeleteModal}
                             modalOpened={this.state.modalOpened.includes(movie.id)} />
                         );
                 })}
                 </div>
+                <DeleteConfirmation isVisible={this.state.confirmModalShown} toggleConfirmDeleteModal={this.toggleConfirmDeleteModal} />
             </div>
             );
     }
