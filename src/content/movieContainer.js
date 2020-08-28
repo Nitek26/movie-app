@@ -164,15 +164,11 @@ class MovieContainer extends React.Component {
                             return (
                                 <Movie
                                     key={movie.id}
-                                    id={movie.id}
-                                    title={movie.title}
-                                    posterPath={movie.poster_path}
-                                    releaseDate={new Date(movie.release_date)}
-                                    genres={movie.genres}
+                                    movie={movie}
                                     toggleDropdownModal={this.toggleDropdownModal}
+                                    modalOpened={this.state.modalOpened.includes(movie.id)} 
                                     toggleConfirmDeleteModal={this.toggleConfirmDeleteModal}
-                                    toggleEditModal={this.toggleEditModal}
-                                    modalOpened={this.state.modalOpened.includes(movie.id)} />
+                                    toggleEditModal={this.toggleEditModal} />
                             );
                         })}
                     </div>
