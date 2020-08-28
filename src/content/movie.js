@@ -7,9 +7,14 @@ import './movie.css';
 const Movie = (props) => {
 
     const openConfirmDeleteModal = (id) =>{
-        props.toggleDropdownModal(id)
-        props.toggleConfirmDeleteModal(id)
-    }
+        props.toggleDropdownModal(id);
+        props.toggleConfirmDeleteModal(id);
+    };
+
+    const openEditModal = (id) =>{
+        props.toggleDropdownModal(id);
+        props.toggleEditModal();
+    };
 
     return (
         <div className="movie">
@@ -17,7 +22,7 @@ const Movie = (props) => {
             <button className="actionButton" onClick={() => props.toggleDropdownModal(props.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
                 <span className="close" onClick={() => props.toggleDropdownModal(props.id)}>X</span>
-                <span className="action">Edit</span>
+                <span className="action" onClick={() => openEditModal(props.id)}>Edit</span>
                 <span className="action" onClick={() => openConfirmDeleteModal(props.id)}>Delete</span>
             </div>
             <br />

@@ -3,7 +3,8 @@ import React from 'react';
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
 import Movie from './movie';
-import DeleteConfirmation from './deleteConfirmation'
+import DeleteConfirmation from './deleteConfirmation';
+import AddEditModal from './addEditModal';
 
 import './movieContainer.css';
 
@@ -123,53 +124,64 @@ class MovieContainer extends React.Component {
         ],
         modalOpened: [],
         confirmModalShown: false,
-        confirmModalId: null
+        confirmModalId: null,
+        editModalShown: false,
     };
 
     toggleDropdownModal = (id) => {
         let currentState = this.state.modalOpened;
-        const newState = currentState.includes(id) ? currentState.filter(i => i !== id) : [ ...currentState, id ]
+        const newState = currentState.includes(id) ? currentState.filter(i => i !== id) : [...currentState, id]
 
-        this.setState({modalOpened: newState});
-    }
+        this.setState({ modalOpened: newState });
+    };
 
     toggleConfirmDeleteModal = (id) => {
         this.setState({
             confirmModalShown: !this.state.confirmModalShown,
             confirmModalId: id
         });
-    }
+    };
 
-    render(){
+    toggleEditModal = () => {
+        this.setState({
+            editModalShown: !this.state.editModalShown,
+        });
+    };
+
+    render() {
         return (
-            <div className="movieContainer">
-                <div className="filters">
-                    <CategoryFilter />
-                    <SearchSorter />
+            <>
+                <div className="movieContainer">
+                    <div className="filters">
+                        <CategoryFilter />
+                        <SearchSorter />
+                    </div>
+                    <div className="searchCount">
+                        <span>{this.state.movies.length}</span> movies found
                 </div>
-                <div className="searchCount">
-                    <span>{this.state.movies.length}</span> movies found
-                </div>
-                <div className="searchResults">
-                {this.state.movies.map(movie=>{
-                    return (
-                        <Movie 
-                            key={movie.id}
-                            id={movie.id}
-                            title={movie.title} 
-                            posterPath={movie.poster_path} 
-                            releaseDate={new Date(movie.release_date)} 
-                            genres={movie.genres}
-                            toggleDropdownModal={this.toggleDropdownModal}
-                            toggleConfirmDeleteModal={this.toggleConfirmDeleteModal}
-                            modalOpened={this.state.modalOpened.includes(movie.id)} />
-                        );
-                })}
+                    <div className="searchResults">
+                        {this.state.movies.map(movie => {
+                            return (
+                                <Movie
+                                    key={movie.id}
+                                    id={movie.id}
+                                    title={movie.title}
+                                    posterPath={movie.poster_path}
+                                    releaseDate={new Date(movie.release_date)}
+                                    genres={movie.genres}
+                                    toggleDropdownModal={this.toggleDropdownModal}
+                                    toggleConfirmDeleteModal={this.toggleConfirmDeleteModal}
+                                    toggleEditModal={this.toggleEditModal}
+                                    modalOpened={this.state.modalOpened.includes(movie.id)} />
+                            );
+                        })}
+                    </div>
                 </div>
                 <DeleteConfirmation isVisible={this.state.confirmModalShown} toggleConfirmDeleteModal={this.toggleConfirmDeleteModal} />
-            </div>
-            );
+                <AddEditModal isVisible={this.state.editModalShown} toggleModal={this.toggleEditModal} />
+            </>
+        );
     }
-} 
+}
 
 export default MovieContainer;
