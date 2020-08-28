@@ -10,9 +10,9 @@ const Movie = (props) => {
         props.toggleConfirmDeleteModal(id);
     };
 
-    const openEditModal = (id) => {
-        props.toggleDropdownModal(id);
-        props.toggleEditModal();
+    const openEditModal = (movie) => {
+        props.toggleDropdownModal(movie.id);
+        props.toggleEditModal(movie);
     };
 
     return (
@@ -21,7 +21,7 @@ const Movie = (props) => {
             <button className="actionButton" onClick={() => props.toggleDropdownModal(props.movie.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
                 <span className="close" onClick={() => props.toggleDropdownModal(props.movie.id)}>X</span>
-                <span className="action" onClick={() => openEditModal(props.movie.id)}>Edit</span>
+                <span className="action" onClick={() => openEditModal(props.movie)}>Edit</span>
                 <span className="action" onClick={() => openConfirmDeleteModal(props.movie.id)}>Delete</span>
             </div>
             <br />

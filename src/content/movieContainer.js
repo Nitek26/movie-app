@@ -125,7 +125,7 @@ class MovieContainer extends React.Component {
         modalOpened: [],
         confirmModalShown: false,
         confirmModalId: null,
-        editModalShown: false,
+        editModalShown: false
     };
 
     toggleDropdownModal = (id) => {
@@ -142,13 +142,19 @@ class MovieContainer extends React.Component {
         });
     };
 
-    toggleEditModal = () => {
+    toggleEditModal = (movie) => {
         this.setState({
             editModalShown: !this.state.editModalShown,
+            movieToEdit: movie
         });
     };
 
     render() {
+        let modal = ''
+        if(this.state.movieToEdit){
+            modal = <AddEditModal isVisible={this.state.editModalShown} movie={this.state.movieToEdit} toggleModal={this.toggleEditModal} />
+        }
+
         return (
             <>
                 <div className="movieContainer">
@@ -174,7 +180,7 @@ class MovieContainer extends React.Component {
                     </div>
                 </div>
                 <DeleteConfirmation isVisible={this.state.confirmModalShown} toggleConfirmDeleteModal={this.toggleConfirmDeleteModal} />
-                <AddEditModal isVisible={this.state.editModalShown} toggleModal={this.toggleEditModal} />
+                {modal}
             </>
         );
     }

@@ -15,7 +15,7 @@
 
 .addEditContainer .addEditModal {
     background-color: #232323;
-    margin: 200px auto 0 auto;
+    margin: 50px auto 0 auto;
     width: 600px;
     padding: 20px 50px;
     color: white;
@@ -36,14 +36,60 @@
 .addEditContainer .addEditModal .header {
     font-size: 2em;
     text-transform: uppercase;
-    align-self: center;
+    align-self: flex-start;
     margin-top: 20px;
 }
 
 .addEditContainer .addEditModal .body {
     font-size: 1.2em;
-    align-self: center;
+    align-self: flex-start;
     margin-top: 20px;
+    width: 100%;
+}
+
+.addEditContainer .addEditModal .body label {
+    display: block;
+    color: #F65261;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.addEditContainer .addEditModal .body input {
+    display: block;
+    color: white;
+    font-size: 1.5em;
+    background-color: #555555;
+    border-radius: 2px;
+    border-style: none;
+    padding: 5px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.addEditContainer .addEditModal .body select {
+    display: block;
+    color: white;
+    font-size: 1.5em;
+    background-color: #555555;
+    border-radius: 2px;
+    border-style: none;
+    padding: 5px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.addEditContainer .addEditModal .body select option {
+    color:white;
+}
+
+.addEditContainer .addEditModal .body select option:checked {
+    background: linear-gradient(#F65261, #F65261);
+}
+
+.addEditContainer .addEditModal .body input:disabled {
+    background-color: #232323;
+    padding-left: 0px;
 }
 
 .addEditContainer .addEditModal .confirm {
