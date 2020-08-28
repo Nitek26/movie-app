@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 import './movie.css';
 
 const Movie = (props) => {
+
+    const openConfirmDeleteModal = (id) =>{
+        props.toggleDropdownModal(id)
+        props.toggleConfirmDeleteModal(id)
+    }
+
     return (
         <div className="movie">
             <img src={props.posterPath} alt={`${props.title} poster`}></img>
@@ -12,7 +18,7 @@ const Movie = (props) => {
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
                 <span className="close" onClick={() => props.toggleDropdownModal(props.id)}>X</span>
                 <span className="action">Edit</span>
-                <span className="action" onClick={() => props.toggleConfirmDeleteModal(props.id)}>Delete</span>
+                <span className="action" onClick={() => openConfirmDeleteModal(props.id)}>Delete</span>
             </div>
             <br />
             <span className="title">{props.title}</span>
