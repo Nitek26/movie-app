@@ -17,6 +17,13 @@ const AddEditModal = (props) => {
         "Romance"
     ];
 
+    let movie = props.movie;
+
+    const reset = () => {
+        console.log('reset cliked');
+    };
+
+
     return (
         <div className={'addEditContainer' + (props.isVisible ? ' visible' : '')}>
             <div className="addEditModal">
@@ -24,24 +31,23 @@ const AddEditModal = (props) => {
                 <div className="header">edit movie</div>
                 <div className="body">
                     <label> movie id
-                        <input type="text" name="id" defaultValue={props.movie.id} disabled="disabled" />
+                        <input type="text" name="id" defaultValue={movie.id} disabled="disabled" />
                     </label>
                     
                     <label> title
-                        <input type="text" name="title" defaultValue={props.movie.title} />
+                        <input type="text" name="title" defaultValue={movie.title} />
                     </label>
                     
                     <label> release date
-                        <input type="text" name="title" defaultValue={props.movie.release_date} />
+                        <input type="text" name="title" defaultValue={movie.release_date} />
                     </label>
                                         
                     <label> movie url
-                        <input type="text" name="title" defaultValue={props.movie.poster_path} />
+                        <input type="text" name="title" defaultValue={movie.poster_path} />
                     </label>
                                         
                     <label> genre
-                        {/* <input type="text" name="title" defaultValue={props.movie.genres} /> */}
-                        <select multiple="multiple" size="1" defaultValue={props.movie.genres}>
+                        <select multiple="multiple" size="1" defaultValue={movie.genres}>
                             {genres.map((genre) => {
                                     return <option key={genre} value={genre}>{genre}</option>
                                 }
@@ -50,14 +56,18 @@ const AddEditModal = (props) => {
                     </label>
                                         
                     <label> overview
-                        <input type="text" name="title" defaultValue={props.movie.overview} />
+                        <input type="text" name="title" defaultValue={movie.overview} />
                     </label>
                                         
                     <label> runtime
-                        <input type="text" name="title" defaultValue={props.movie.runtime} />
+                        <input type="text" name="title" defaultValue={movie.runtime} />
                     </label>
                 </div>
-                <button className="confirm" onClick={() => props.toggleModal()}>confirm</button>
+                <div className="buttons">
+                    <button className="reset" onClick={() => reset()}>reset</button>
+                    <button className="confirm" onClick={() => props.toggleModal()}>save</button>
+                </div>
+
             </div>
         </div>
     );
