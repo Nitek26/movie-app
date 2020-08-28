@@ -36,13 +36,13 @@
 .deleteConfirmation .confirmModal .header {
     font-size: 2em;
     text-transform: uppercase;
-    align-self: center;
+    align-self: flex-start;
     margin-top: 20px;
 }
 
 .deleteConfirmation .confirmModal .body {
     font-size: 1.2em;
-    align-self: center;
+    align-self: flex-start;
     margin-top: 20px;
 }
 
