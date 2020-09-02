@@ -127,7 +127,8 @@ class MovieContainer extends React.Component {
         confirmModalShown: false,
         confirmModalId: null,
         editModalShown: false,
-        categoryFilter: 'all'
+        categoryFilter: 'all',
+        sortBy: 'release_date'
     };
 
     toggleDropdownModal = (id) => {
@@ -157,8 +158,19 @@ class MovieContainer extends React.Component {
         })
     }
 
-    render() {
+    sort = (a, b) => {
+        if(a[this.state.sortBy] > b[this.state.sortBy]){
+            return 1;
+        }
 
+        if(a[this.state.sortBy] < b[this.state.sortBy]){
+            return -1;
+        }
+        
+        return 0;
+    };
+
+    render() {
         let moviesToShow = this.state.movies.filter(movie => {
             if(this.state.categoryFilter === 'all'){
                 return true;
@@ -166,6 +178,8 @@ class MovieContainer extends React.Component {
                 return movie.genres.map(genre => genre.toLowerCase()).includes(this.state.categoryFilter);
             }
         });
+
+        moviesToShow = moviesToShow.sort(this.sort);
 
         let modal = ''
         if(this.state.movieToEdit){
