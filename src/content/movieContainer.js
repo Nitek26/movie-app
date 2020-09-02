@@ -158,6 +158,12 @@ class MovieContainer extends React.Component {
         })
     }
 
+    setSortBy = (filter) => {
+        this.setState({
+            sortBy: filter
+        })
+    }
+
     sort = (a, b) => {
         if(a[this.state.sortBy] > b[this.state.sortBy]){
             return 1;
@@ -166,7 +172,7 @@ class MovieContainer extends React.Component {
         if(a[this.state.sortBy] < b[this.state.sortBy]){
             return -1;
         }
-        
+
         return 0;
     };
 
@@ -191,7 +197,7 @@ class MovieContainer extends React.Component {
                 <div className="movieContainer">
                     <div className="filters">
                         <CategoryFilter filter={this.state.categoryFilter} setCategoryFilter={this.setCategoryFilter} />
-                        <SearchSorter />
+                        <SearchSorter sortBy={this.state.sortBy} setSortBy={this.setSortBy} />
                     </div>
                     <div className="searchCount">
                         <span>{moviesToShow.length}</span> movies found
