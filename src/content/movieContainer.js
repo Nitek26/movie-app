@@ -43,7 +43,8 @@ class MovieContainer extends React.Component {
                     "Animation",
                     "Adventure",
                     "Family",
-                    "Comedy"
+                    "Comedy",
+                    "Crime"
                 ],
                 "runtime": 108
             },
@@ -125,7 +126,8 @@ class MovieContainer extends React.Component {
         modalOpened: [],
         confirmModalShown: false,
         confirmModalId: null,
-        editModalShown: false
+        editModalShown: false,
+        categoryFilter: 'all'
     };
 
     toggleDropdownModal = (id) => {
@@ -149,7 +151,22 @@ class MovieContainer extends React.Component {
         });
     };
 
+    setCategoryFilter = (filter) => {
+        this.setState({
+            categoryFilter: filter
+        })
+    }
+
     render() {
+
+        let moviesToShow = this.state.movies.filter(movie => {
+            if(this.state.categoryFilter === 'all'){
+                return true;
+            } else {
+                return movie.genres.map(genre => genre.toLowerCase()).includes(this.state.categoryFilter);
+            }
+        });
+
         let modal = ''
         if(this.state.movieToEdit){
             modal = <AddEditModal isVisible={this.state.editModalShown} movie={this.state.movieToEdit} toggleModal={this.toggleEditModal} />
@@ -159,14 +176,14 @@ class MovieContainer extends React.Component {
             <>
                 <div className="movieContainer">
                     <div className="filters">
-                        <CategoryFilter />
+                        <CategoryFilter filter={this.state.categoryFilter} setCategoryFilter={this.setCategoryFilter} />
                         <SearchSorter />
                     </div>
                     <div className="searchCount">
-                        <span>{this.state.movies.length}</span> movies found
+                        <span>{moviesToShow.length}</span> movies found
                 </div>
                     <div className="searchResults">
-                        {this.state.movies.map(movie => {
+                        {moviesToShow.map(movie => {
                             return (
                                 <Movie
                                     key={movie.id}
