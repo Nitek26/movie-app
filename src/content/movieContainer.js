@@ -211,7 +211,8 @@ class MovieContainer extends React.Component {
                                     toggleDropdownModal={this.toggleDropdownModal}
                                     modalOpened={this.state.modalOpened.includes(movie.id)} 
                                     toggleConfirmDeleteModal={this.toggleConfirmDeleteModal}
-                                    toggleEditModal={this.toggleEditModal} />
+                                    toggleEditModal={this.toggleEditModal}
+                                    selectMovie={this.props.selectMovie} />
                             );
                         })}
                     </div>

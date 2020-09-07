@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 
 import AddEditModal from '../modals/addEditModal';
 
-import './movieHeader.css';
+import './movieSearch.css';
 
-const MovieHeader = () => {
+const MovieSearch = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleAddModal = () => {
@@ -12,7 +12,7 @@ const MovieHeader = () => {
     };
 
     return (
-        <div className="movieHeader">
+        <div className="movieSearch">
             <img src="logo.png" alt="Application logo"></img>
             <div className="addMovieContainer"><button onClick={() => setIsVisible(true)}>+ Add movie</button></div>
             <div className="headerText">
@@ -27,4 +27,4 @@ const MovieHeader = () => {
     );
 };
 
-export default MovieHeader;
+export default MovieSearch;

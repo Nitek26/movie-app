@@ -17,7 +17,7 @@ const Movie = (props) => {
 
     return (
         <div className="movie">
-            <img src={props.movie.poster_path} alt={`${props.movie.title} poster`}></img>
+            <img src={props.movie.poster_path} alt={`${props.movie.title} poster`} onClick={() => props.selectMovie(props.movie)}></img>
             <button className="actionButton" onClick={() => props.toggleDropdownModal(props.movie.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
                 <span className="close" onClick={() => props.toggleDropdownModal(props.movie.id)}>X</span>
