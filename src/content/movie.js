@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import './movie.css';
 
 const Movie = (props) => {
 
-    const openConfirmDeleteModal = (id) => {
+    const openConfirmDeleteModal = useCallback((id) => {
         props.toggleDropdownModal(id);
         props.toggleConfirmDeleteModal(id);
-    };
+    }, [props]);
 
-    const openEditModal = (movie) => {
+    const openEditModal = useCallback((movie) => {
         props.toggleDropdownModal(movie.id);
         props.toggleEditModal(movie);
-    };
+    }, [props]);
 
     return (
         <div className="movie">

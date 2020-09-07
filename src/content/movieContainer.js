@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
@@ -23,23 +23,23 @@ const MovieContainer = (props) => {
         setMovies(movieList);
     }, []);
 
-    const toggleDropdownModal = (id) => {
+    const toggleDropdownModal = useCallback((id) => {
         let currentState = modalOpened;
         const newState = currentState.includes(id) ? currentState.filter(i => i !== id) : [...currentState, id]
 
         setModalOpened(newState);
-    };
+    }, [modalOpened]);
 
-    const toggleConfirmDeleteModal = () => {
+    const toggleConfirmDeleteModal = useCallback(() => {
         setConfirmModalShown(confirmModalShown => !confirmModalShown);
-    };
+    }, []);
 
-    const toggleEditModal = (movie) => {
+    const toggleEditModal = useCallback((movie) => {
         setEditModalShown(editModalShown => !editModalShown);
         setMovieToEdit(movie);
-    };
+    }, []);
 
-    const sort = (a, b) => {
+    const sort = useCallback((a, b) => {
         if (a[sortBy] > b[sortBy]) {
             return 1;
         }
@@ -49,7 +49,7 @@ const MovieContainer = (props) => {
         }
 
         return 0;
-    };
+    }, [sortBy]);
 
     let moviesToShow = movies.filter(movie => {
         if (categoryFilter === 'all') {
