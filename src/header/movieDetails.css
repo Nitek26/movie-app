@@ -2,10 +2,10 @@
     background-color: #424242;
     padding: 10px 20px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 7fr;
     grid-auto-rows: minmax(50px, auto);
     gap: 10px;
-    height: 210px;
+    height: 300px;
 }
 
 .movieDetails .searchButtonContainer{
@@ -20,6 +20,38 @@
 }
 
 .movieDetails .poster img{
-    height: 150px;
+    height: 200px;
+}
+
+.movieDetails .content {
+    color: white;
+    font-size: 1.2em;
+}
+
+.movieDetails .content .title{
+    font-size: 2em;
+}
+
+.movieDetails .content .score{
+    display: inline-block;
+    margin-left: 20px;
+    border-radius: 50%;
+    border: 2px white solid;
+    padding: 5px;
+    color: greenyellow;
+}
+
+.movieDetails .content .year{
+    color: #F65261;
+}
+
+.movieDetails .content .duration{
+    color: #F65261;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.movieDetails .content .description{
+    font-size: 1rem;
 }
 
