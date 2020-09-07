@@ -9,6 +9,12 @@ const MovieDetails = (props) => {
             <div className="searchButtonContainer">
                 <img src="search.png" alt="Search button" onClick={() => props.selectMovie()}></img>
             </div>
+            <div className="poster">
+                <img src={props.movie.poster_path} alt="movie poster" />
+            </div>
+            <div className="content">
+
+            </div>
         </div>
     );
 };
