@@ -11,7 +11,7 @@ function App() {
 
   return (
   <div className="app">
-    {selectedMovie ? <MovieDetails selectedMovie={ selectedMovie } /> : <MovieSearch /> }
+    {selectedMovie ? <MovieDetails selectedMovie={ selectedMovie } selectMovie={ setSelectedMovie } /> : <MovieSearch /> }
     <MovieContainer selectMovie={ setSelectedMovie } />
     <MovieFooter />
   </div>

@@ -1,19 +1,14 @@
-import React, {useState} from 'react';
-
-import AddEditModal from '../modals/addEditModal';
+import React from 'react';
 
 import './movieDetails.css';
 
-const MovieDetails = () => {
-    // const [isVisible, setIsVisible] = useState(false);
-
-    // const toggleAddModal = () => {
-    //     setIsVisible(false);
-    // };
-
+const MovieDetails = (props) => {
     return (
-        <div>
-            Hello from movie details
+        <div className="movieDetails">
+            <img src="logo.png" alt="Application logo"></img>
+            <div className="searchButtonContainer">
+                <img src="search.png" alt="Search button" onClick={() => props.selectMovie()}></img>
+            </div>
         </div>
     );
 };
