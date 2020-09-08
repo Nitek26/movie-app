@@ -6,6 +6,8 @@ import Movie from './movie';
 import DeleteConfirmation from '../modals/deleteConfirmation';
 import AddEditModal from '../modals/addEditModal';
 
+import useToggle from '../utils/useToggle'
+
 import movieList from '../movies' 
 
 import './movieContainer.css';
@@ -13,8 +15,8 @@ import './movieContainer.css';
 const MovieContainer = (props) => {
     const [movies, setMovies] = useState([]);
     const [modalOpened, setModalOpened] = useState([]);
-    const [confirmModalShown, setConfirmModalShown] = useState(false);
-    const [editModalShown, setEditModalShown] = useState(false);
+    const [confirmModalShown, toggleConfirmDeleteModal] = useToggle(false);
+    const [editModalShown, toggleEditModal] = useToggle(false);
     const [movieToEdit, setMovieToEdit] = useState(undefined);
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [sortBy, setSortBy] = useState('release_date');
@@ -30,14 +32,10 @@ const MovieContainer = (props) => {
         setModalOpened(newState);
     }, [modalOpened]);
 
-    const toggleConfirmDeleteModal = useCallback(() => {
-        setConfirmModalShown(confirmModalShown => !confirmModalShown);
-    }, []);
-
-    const toggleEditModal = useCallback((movie) => {
-        setEditModalShown(editModalShown => !editModalShown);
+    const toggleEditModalWithSet = (movie) => {
+        toggleEditModal(editModalShown);
         setMovieToEdit(movie);
-    }, []);
+    };
 
     const sort = useCallback((a, b) => {
         if (a[sortBy] > b[sortBy]) {
@@ -63,7 +61,7 @@ const MovieContainer = (props) => {
 
     let modal = ''
     if (movieToEdit) {
-        modal = <AddEditModal isVisible={editModalShown} movie={movieToEdit} toggleModal={toggleEditModal} />
+        modal = <AddEditModal isVisible={editModalShown} movie={movieToEdit} toggleModal={toggleEditModalWithSet} />
     }
 
     return (
@@ -85,7 +83,7 @@ const MovieContainer = (props) => {
                                 toggleDropdownModal={toggleDropdownModal}
                                 modalOpened={modalOpened.includes(movie.id)}
                                 toggleConfirmDeleteModal={toggleConfirmDeleteModal}
-                                toggleEditModal={toggleEditModal}
+                                toggleEditModal={toggleEditModalWithSet}
                                 selectMovie={props.selectMovie} />
                         );
                     })}
