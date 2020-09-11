@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 
 
@@ -10,23 +10,17 @@ import AddEditModal from '../modals/addEditModal';
 
 import useToggle from '../utils/useToggle'
 
-import movieList from '../movies' 
 import { getMovies } from '../utils/store/selectors'
 
 import './movieContainer.css';
 
 const MovieContainer = ({ movies }) => {
-    //const [movies, setMovies] = useState([]);
     const [modalOpened, setModalOpened] = useState([]);
     const [confirmModalShown, toggleConfirmDeleteModal] = useToggle(false);
     const [editModalShown, toggleEditModal] = useToggle(false);
     const [movieToEdit, setMovieToEdit] = useState(undefined);
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [sortBy, setSortBy] = useState('release_date');
-
-    // useEffect(() => {
-    //     setMovies(movieList);
-    // }, []);
 
     const toggleDropdownModal = useCallback((id) => {
         let currentState = modalOpened;
