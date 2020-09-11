@@ -18,8 +18,26 @@ const loadMoviesFailure = () => ({
 const setAddModalVisbility = (visible) => ({
     type: ACTIONS.SET_ADD_MODAL_VISIBILITY,
     payload:{
-        visible: visible
+        visible
     }
 });
 
-export { loadMoviesInProgress, loadMoviesSuccess, loadMoviesFailure, setAddModalVisbility };
+const selectMovie = (movie) => ({
+    type: ACTIONS.SELECT_MOVIE,
+    payload:{
+        movie
+    }
+});
+
+const deselectMovie = () => ({
+    type: ACTIONS.DESELECT_MOVIE
+});
+
+export { 
+    loadMoviesInProgress, 
+    loadMoviesSuccess, 
+    loadMoviesFailure, 
+    setAddModalVisbility, 
+    selectMovie, 
+    deselectMovie 
+};

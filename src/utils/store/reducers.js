@@ -1,6 +1,6 @@
 import ACTIONS from './actionTypes'
 
-const modalReducer = (state = {}, action) => {
+const viewReducer = (state = {}, action) => {
     switch(action.type){
         case ACTIONS.SET_ADD_MODAL_VISIBILITY: {
             const visible = action.payload.visible;
@@ -9,6 +9,18 @@ const modalReducer = (state = {}, action) => {
                 ...state,
                 addModalVisible: visible
             };
+        }
+        case ACTIONS.SELECT_MOVIE: {
+            return {
+                ...state,
+                selectedMovie: action.payload.movie
+            }
+        }
+        case ACTIONS.DESELECT_MOVIE: {
+            return {
+                ...state,
+                selectedMovie: undefined
+            }
         }
         default: {
             return state;
@@ -19,7 +31,6 @@ const modalReducer = (state = {}, action) => {
 const movieReducer = (state = {}, action) => {
     switch(action.type){
         case ACTIONS.LOAD_MOVIES_IN_PROGRESS: {
-            console.log("in progress");
             return {
                 ...state,
                 areMoviesLoading: true
@@ -27,7 +38,6 @@ const movieReducer = (state = {}, action) => {
         }
 
         case ACTIONS.LOAD_MOVIES_SUCCESS: {
-            console.log("done");
             return {
                 ...state,
                 areMoviesLoading: false,
@@ -49,4 +59,4 @@ const movieReducer = (state = {}, action) => {
     }
 };
 
-export { modalReducer, movieReducer };
+export { viewReducer, movieReducer };

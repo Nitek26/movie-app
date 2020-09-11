@@ -1,4 +1,6 @@
-export const getAddModalVisbility = store => store.modalReducer.addModalVisible;
+export const getAddModalVisbility = store => store.viewReducer.addModalVisible;
+
+export const getSelectedMovie = store => store.viewReducer.selectedMovie;
 
 export const getAreMoviesLoading = store => store.movieReducer.areMoviesLoading;
 
