@@ -4,3 +4,8 @@
   margin: 0 30px;
 }
 
+.loadingMessage {
+  display: block;
+  font-size: 3em;
+}
+

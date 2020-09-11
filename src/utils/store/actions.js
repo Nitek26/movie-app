@@ -1,7 +1,18 @@
 import ACTIONS from './actionTypes'
 
-const loadMovies = () => ({
-    type: ACTIONS.LOAD_MOVIES
+const loadMoviesInProgress = () => ({
+    type: ACTIONS.LOAD_MOVIES_IN_PROGRESS
+});
+
+const loadMoviesSuccess =  movies=> ({
+    type: ACTIONS.LOAD_MOVIES_SUCCESS,
+    payload:{
+        movies
+    }
+});
+
+const loadMoviesFailure = () => ({
+    type: ACTIONS.LOAD_MOVIES_FAILURE
 });
 
 const setAddModalVisbility = (visible) => ({
@@ -11,4 +22,4 @@ const setAddModalVisbility = (visible) => ({
     }
 });
 
-export { loadMovies, setAddModalVisbility };
+export { loadMoviesInProgress, loadMoviesSuccess, loadMoviesFailure, setAddModalVisbility };

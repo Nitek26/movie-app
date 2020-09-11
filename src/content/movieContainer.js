@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { connect } from 'react-redux';
+
 
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
@@ -9,11 +11,12 @@ import AddEditModal from '../modals/addEditModal';
 import useToggle from '../utils/useToggle'
 
 import movieList from '../movies' 
+import { getMovies } from '../utils/store/selectors'
 
 import './movieContainer.css';
 
-const MovieContainer = (props) => {
-    const [movies, setMovies] = useState([]);
+const MovieContainer = ({ movies }) => {
+    //const [movies, setMovies] = useState([]);
     const [modalOpened, setModalOpened] = useState([]);
     const [confirmModalShown, toggleConfirmDeleteModal] = useToggle(false);
     const [editModalShown, toggleEditModal] = useToggle(false);
@@ -21,9 +24,9 @@ const MovieContainer = (props) => {
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [sortBy, setSortBy] = useState('release_date');
 
-    useEffect(() => {
-        setMovies(movieList);
-    }, []);
+    // useEffect(() => {
+    //     setMovies(movieList);
+    // }, []);
 
     const toggleDropdownModal = useCallback((id) => {
         let currentState = modalOpened;
@@ -84,7 +87,7 @@ const MovieContainer = (props) => {
                                 modalOpened={modalOpened.includes(movie.id)}
                                 toggleConfirmDeleteModal={toggleConfirmDeleteModal}
                                 toggleEditModal={toggleEditModalWithSet}
-                                selectMovie={props.selectMovie} />
+                                selectMovie={() => {}} />
                         );
                     })}
                 </div>
@@ -93,6 +96,16 @@ const MovieContainer = (props) => {
             {modal}
         </>
     );
-}
+};
 
-export default MovieContainer;
+const mapStateToProps = state => {
+    const movies = getMovies(state);
+  
+      return { movies }
+  };
+  
+//   const mapDispatchToProps = dispatch => ({
+//     startLoadingMovies: () => dispatch(loadMovies())
+//   });
+
+export default connect(mapStateToProps, null)(MovieContainer);

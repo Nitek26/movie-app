@@ -1,10 +1,16 @@
-import { createStore, combineReducers } from 'redux'
-
-import modalReducer from './reducers'
+import { createStore, combineReducers } from 'redux';
+import { applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { modalReducer, movieReducer } from './reducers';
 
 const initialState = {
-    modalReducer:{
+    modalReducer: {
         addModalVisible: false
+    },
+    movieReducer: {
+        areMoviesLoading: false,
+        movies:[],
+        totalMovies: 0
     }
     // selectedMovie: undefined,
     // movies:[],
@@ -17,7 +23,8 @@ const initialState = {
 };
 
 const rootReducer = combineReducers({
-    modalReducer
+    modalReducer, 
+    movieReducer
 });
 
-export const configureStore = () => createStore(rootReducer, initialState);
+export const configureStore = () => createStore(rootReducer, initialState, applyMiddleware(thunk));
