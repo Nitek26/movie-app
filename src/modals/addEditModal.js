@@ -28,7 +28,7 @@ const AddEditModal = (props) => {
     return (
         <div className={'addEditContainer' + (props.isVisible ? ' visible' : '')}>
             <div className="addEditModal">
-                <button className="close" onClick={() => props.toggleModal()}>X</button>
+                <button className="close" onClick={() => props.closeModal()}>X</button>
                 <div className="header">{isEditMode ? 'edit' : 'add'} movie</div>
                 <div className="body">
                     {isEditMode ? (<label> movie id
@@ -65,7 +65,7 @@ const AddEditModal = (props) => {
                 </div>
                 <div className="buttons">
                     <button className="reset" onClick={() => reset()}>reset</button>
-                    <button className="confirm" onClick={() => props.toggleModal()}>{isEditMode ? 'save' : 'submit'}</button>
+                    <button className="confirm" onClick={() => props.closeModal()}>{isEditMode ? 'save' : 'submit'}</button>
                 </div>
 
             </div>
@@ -74,7 +74,7 @@ const AddEditModal = (props) => {
 };
 
 AddEditModal.propTypes = {
-    toggleModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired
 };
 

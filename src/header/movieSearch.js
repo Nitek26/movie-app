@@ -1,20 +1,17 @@
-import React, { useState} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
 import AddEditModal from '../modals/addEditModal';
+import { setAddModalVisbility } from '../utils/store/actions'
+import { getAddModalVisbility } from '../utils/store/selectors'
 
 import './movieSearch.css';
 
-const MovieSearch = () => {
-    const [isVisible, setIsVisible] = useState(false);
-
-    const toggleAddModal = () => {
-        setIsVisible(false);
-    };
-
+const MovieSearch = (props) => {
     return (
         <div className="movieSearch">
             <img src="logo.png" alt="Application logo"></img>
-            <div className="addMovieContainer"><button onClick={() => setIsVisible(true)}>+ Add movie</button></div>
+            <div className="addMovieContainer"><button onClick={() => props.openModal()}>+ Add movie</button></div>
             <div className="headerText">
                 Find your movie
                 </div>
@@ -22,9 +19,22 @@ const MovieSearch = () => {
                 <input className="searchInput" type="text" placeholder="What do you want to watch?"></input>
                 <button className="searchButton">Search</button>
             </form>
-            <AddEditModal isVisible={isVisible} movie={{}} toggleModal={toggleAddModal} />
+            <AddEditModal isVisible={props.addModalVisible} movie={{}} closeModal={() => props.closeModal()}  />
         </div>
     );
 };
 
-export default MovieSearch;
+const mapStateToProps = state => {
+    const addModalVisible = getAddModalVisbility(state);
+
+    return { addModalVisible }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        closeModal: () => dispatch(setAddModalVisbility(false)),
+        openModal: () => dispatch(setAddModalVisbility(true))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieSearch);

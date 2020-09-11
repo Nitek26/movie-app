@@ -61,7 +61,7 @@ const MovieContainer = (props) => {
 
     let modal = ''
     if (movieToEdit) {
-        modal = <AddEditModal isVisible={editModalShown} movie={movieToEdit} toggleModal={toggleEditModalWithSet} />
+        modal = <AddEditModal isVisible={editModalShown} movie={movieToEdit} closeModal={toggleEditModalWithSet} />
     }
 
     return (
