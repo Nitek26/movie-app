@@ -17,7 +17,13 @@ const Movie = (props) => {
 
     return (
         <div className="movie">
-            <img src={props.movie.poster_path} alt={`${props.movie.title} poster`} onClick={() => props.selectMovie(props.movie)}></img>
+            <img 
+                src={props.movie.poster_path} 
+                alt={`${props.movie.title} poster`}
+                onError={(e)=> {
+                    e.target.onerror = null; 
+                    e.target.src='empty.png'
+                }} onClick={() => props.selectMovie(props.movie)}></img>
             <button className="actionButton" onClick={() => props.showOptions(props.movie.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
                 <span className="close" onClick={() => props.hideOptions()}>X</span>
