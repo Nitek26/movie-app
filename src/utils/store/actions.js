@@ -15,6 +15,20 @@ const loadMoviesFailure = () => ({
     type: ACTIONS.LOAD_MOVIES_FAILURE
 });
 
+const setFilter = filterBy => ({
+    type: ACTIONS.SET_FILTER,
+    payload:{
+        filterBy
+    }
+});
+
+const setSort = sortBy => ({
+    type: ACTIONS.SET_SORT,
+    payload:{
+        sortBy
+    }
+});
+
 const setAddModalVisbility = (visible) => ({
     type: ACTIONS.SET_ADD_MODAL_VISIBILITY,
     payload:{
@@ -33,27 +47,26 @@ const deselectMovie = () => ({
     type: ACTIONS.DESELECT_MOVIE
 });
 
-const setFilter = filterBy => ({
-    type: ACTIONS.SET_FILTER,
+const showOptions = (id) => ({
+    type: ACTIONS.SHOW_OPTIONS,
     payload:{
-        filterBy
+        id
     }
 });
 
-const setSort = sortBy => ({
-    type: ACTIONS.SET_SORT,
-    payload:{
-        sortBy
-    }
+const hideOptions = (id) => ({
+    type: ACTIONS.HIDE_OPTIONS
 });
 
 export { 
     loadMoviesInProgress, 
     loadMoviesSuccess, 
     loadMoviesFailure, 
+    setFilter,
+    setSort,
     setAddModalVisbility, 
     selectMovie, 
     deselectMovie,
-    setFilter,
-    setSort 
+    showOptions, 
+    hideOptions 
 };

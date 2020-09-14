@@ -22,6 +22,18 @@ const viewReducer = (state = {}, action) => {
                 selectedMovie: undefined
             }
         }
+        case ACTIONS.SHOW_OPTIONS: {
+            return {
+                ...state,
+                optionsOpenFor: action.payload.id
+            }
+        }
+        case ACTIONS.HIDE_OPTIONS: {
+            return {
+                ...state,
+                optionsOpenFor: 0
+            }
+        }
         default: {
             return state;
         }

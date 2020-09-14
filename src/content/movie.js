@@ -18,9 +18,9 @@ const Movie = (props) => {
     return (
         <div className="movie">
             <img src={props.movie.poster_path} alt={`${props.movie.title} poster`} onClick={() => props.selectMovie(props.movie)}></img>
-            <button className="actionButton" onClick={() => props.toggleDropdownModal(props.movie.id)}>...</button>
+            <button className="actionButton" onClick={() => props.showOptions(props.movie.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
-                <span className="close" onClick={() => props.toggleDropdownModal(props.movie.id)}>X</span>
+                <span className="close" onClick={() => props.hideOptions()}>X</span>
                 <span className="action" onClick={() => openEditModal(props.movie)}>Edit</span>
                 <span className="action" onClick={() => openConfirmDeleteModal(props.movie.id)}>Delete</span>
             </div>
@@ -41,7 +41,7 @@ Movie.propTypes = {
         release_date: PropTypes.string.isRequired,
         id: PropTypes.number,
     }).isRequired,
-    toggleDropdownModal: PropTypes.func.isRequired,
+    showOptions: PropTypes.func.isRequired,
     modalOpened: PropTypes.bool.isRequired,
     toggleConfirmDeleteModal: PropTypes.func.isRequired,
     toggleEditModal: PropTypes.func.isRequired
