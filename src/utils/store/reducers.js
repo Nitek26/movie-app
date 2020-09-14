@@ -10,6 +10,14 @@ const viewReducer = (state = {}, action) => {
                 addModalVisible: visible
             };
         }
+        case ACTIONS.SET_DELETE_MODAL_VISIBILITY: {
+            const id = action.payload.id;
+
+            return {
+                ...state,
+                deleteConfirmationOpenedFor: id
+            };
+        }
         case ACTIONS.SELECT_MOVIE: {
             return {
                 ...state,
@@ -25,13 +33,19 @@ const viewReducer = (state = {}, action) => {
         case ACTIONS.SHOW_OPTIONS: {
             return {
                 ...state,
-                optionsOpenFor: action.payload.id
+                optionsOpenedFor: action.payload.id
             }
         }
         case ACTIONS.HIDE_OPTIONS: {
             return {
                 ...state,
-                optionsOpenFor: 0
+                optionsOpenedFor: 0
+            }
+        }
+        case ACTIONS.MOVIES_CHANGED: {
+            return {
+                ...state,
+                deleteConfirmationOpenedFor: 0
             }
         }
         default: {
@@ -73,6 +87,11 @@ const movieReducer = (state = {}, action) => {
                 ...state,
                 sortBy: action.payload.sortBy
             };
+        }
+        case ACTIONS.MOVIES_CHANGED: {
+            return {
+                ...state
+            }
         }
         default: {
             return state;

@@ -1,7 +1,9 @@
 import { 
     loadMoviesInProgress, 
     loadMoviesSuccess, 
-    loadMoviesFailure} from './actions';
+    loadMoviesFailure,
+    moviesChanged
+} from './actions';
 
 export const loadMovies = (filter, sort) => async (dispatch) => {
     try {
@@ -19,3 +21,24 @@ export const loadMovies = (filter, sort) => async (dispatch) => {
         alert('Error');
     }
 };
+
+export const deleteMovie = (id) => async (dispatch) => {
+    try {
+        let url = `http://localhost:4000/movies/${id}`;
+        const response =  await fetch(url, {
+            method: 'DELETE'
+        });
+    
+        if(response.status === 204) {
+            dispatch(moviesChanged());
+            return;
+        }
+
+        alert('Error');
+
+        
+    } catch (error) {
+        alert('Error');
+    }
+};
+

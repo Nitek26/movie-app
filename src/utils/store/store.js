@@ -5,12 +5,14 @@ import { viewReducer, movieReducer } from './reducers';
 
 const initialState = {
     viewReducer: {
-        addModalVisible: false, 
+        addModalVisible: false,
         selectedMovie: undefined,
-        optionsOpenFor: 0
+        optionsOpenedFor: 0,
+        deleteConfirmationOpenedFor: 0
     },
     movieReducer: {
         areMoviesLoading: false,
+        needsReload: true,
         movies:[],
         totalMovies: 0,
         filterBy: 'all',

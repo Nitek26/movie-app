@@ -6,8 +6,8 @@ import './movie.css';
 const Movie = (props) => {
 
     const openConfirmDeleteModal = useCallback((id) => {
-        props.toggleDropdownModal(id);
-        props.toggleConfirmDeleteModal(id);
+        props.hideOptions();
+        props.deleteMovie(id);
     }, [props]);
 
     const openEditModal = useCallback((movie) => {
@@ -42,8 +42,9 @@ Movie.propTypes = {
         id: PropTypes.number,
     }).isRequired,
     showOptions: PropTypes.func.isRequired,
+    hideOptions: PropTypes.func.isRequired,
     modalOpened: PropTypes.bool.isRequired,
-    toggleConfirmDeleteModal: PropTypes.func.isRequired,
+    deleteMovie: PropTypes.func.isRequired,
     toggleEditModal: PropTypes.func.isRequired
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 
@@ -10,23 +10,30 @@ import AddEditModal from '../modals/addEditModal';
 
 import useToggle from '../utils/useToggle'
 
-import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor } from '../utils/store/selectors'
-import { setFilter, setSort, selectMovie, showOptions, hideOptions } from '../utils/store/actions';
+import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor } from '../utils/store/selectors'
+import { setFilter, setSort, selectMovie, showOptions, hideOptions, setDeleteModalVisbility } from '../utils/store/actions';
+import { deleteMovie } from '../utils/store/thunks';
 
 import './movieContainer.css';
 
-const MovieContainer = ({ movies, filter, sort, selectMovie, setFilter, setSort, totalMovies, showOptions, hideOptions, optionsOpenFor }) => {
-    //const [modalOpened, setModalOpened] = useState([]);
-    const [confirmModalShown, toggleConfirmDeleteModal] = useToggle(false);
+const MovieContainer = ({ 
+    movies, 
+    filter, 
+    sort, 
+    selectMovie, 
+    setFilter, 
+    setSort, 
+    totalMovies, 
+    showOptions, 
+    hideOptions, 
+    optionsOpenFor, 
+    deleteConfirmationOpenedFor,
+    showDeleteConfirmModal, 
+    hideDeleteConfirmModal,
+    deleteMovie 
+}) => {
     const [editModalShown, toggleEditModal] = useToggle(false);
     const [movieToEdit, setMovieToEdit] = useState(undefined);
-
-    // const toggleDropdownModal = useCallback((id) => {
-    //     let currentState = modalOpened;
-    //     const newState = currentState.includes(id) ? currentState.filter(i => i !== id) : [...currentState, id]
-
-    //     setModalOpened(newState);
-    // }, [modalOpened]);
 
     const toggleEditModalWithSet = (movie) => {
         toggleEditModal(editModalShown);
@@ -57,14 +64,19 @@ const MovieContainer = ({ movies, filter, sort, selectMovie, setFilter, setSort,
                                 showOptions={showOptions}
                                 hideOptions={hideOptions}
                                 modalOpened={optionsOpenFor === movie.id}
-                                toggleConfirmDeleteModal={toggleConfirmDeleteModal}
+                                deleteMovie={showDeleteConfirmModal}
                                 toggleEditModal={toggleEditModalWithSet}
                                 selectMovie={selectMovie} />
                         );
                     })}
                 </div>
             </div>
-            <DeleteConfirmation isVisible={confirmModalShown} toggleConfirmDeleteModal={toggleConfirmDeleteModal} />
+            <DeleteConfirmation 
+                isVisible={!!deleteConfirmationOpenedFor} 
+                movieToDelete={deleteConfirmationOpenedFor} 
+                hideDeleteConfirmModal={hideDeleteConfirmModal}
+                deleteMovie={deleteMovie}
+                 />
             {modal}
         </>
     );
@@ -76,8 +88,9 @@ const mapStateToProps = state => {
     const sort = getSortBy(state);
     const totalMovies = getTotalMovies(state);
     const optionsOpenFor = getOptionsOpenedFor(state);
+    const deleteConfirmationOpenedFor = getDeleteConfirmationOpenedFor(state);
 
-    return { movies, filter, sort, totalMovies, optionsOpenFor }
+    return { movies, filter, sort, totalMovies, optionsOpenFor, deleteConfirmationOpenedFor }
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -85,7 +98,10 @@ const mapDispatchToProps = dispatch => ({
     setFilter: filter => dispatch(setFilter(filter)),
     setSort: sort => dispatch(setSort(sort)),
     showOptions: id => dispatch(showOptions(id)),
-    hideOptions: () => dispatch(hideOptions())
+    hideOptions: () => dispatch(hideOptions()),
+    showDeleteConfirmModal: (id) => dispatch(setDeleteModalVisbility(id)),
+    hideDeleteConfirmModal: () => dispatch(setDeleteModalVisbility(0)),
+    deleteMovie: (id) => dispatch(deleteMovie(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer);
