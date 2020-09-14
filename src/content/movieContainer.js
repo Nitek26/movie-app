@@ -10,19 +10,18 @@ import AddEditModal from '../modals/addEditModal';
 
 import useToggle from '../utils/useToggle'
 
-import { getMovies, getFilterBy } from '../utils/store/selectors'
-import { setFilter, selectMovie } from '../utils/store/actions';
+import { getMovies, getFilterBy, getSortBy, getTotalMovies } from '../utils/store/selectors'
+import { setFilter, setSort, selectMovie } from '../utils/store/actions';
 
 import './movieContainer.css';
 
 
 
-const MovieContainer = ({ movies, filter, selectMovie, setFilter }) => {
+const MovieContainer = ({ movies, filter, sort, selectMovie, setFilter, setSort, totalMovies }) => {
     const [modalOpened, setModalOpened] = useState([]);
     const [confirmModalShown, toggleConfirmDeleteModal] = useToggle(false);
     const [editModalShown, toggleEditModal] = useToggle(false);
     const [movieToEdit, setMovieToEdit] = useState(undefined);
-    const [sortBy, setSortBy] = useState('release_date');
 
     const toggleDropdownModal = useCallback((id) => {
         let currentState = modalOpened;
@@ -36,20 +35,6 @@ const MovieContainer = ({ movies, filter, selectMovie, setFilter }) => {
         setMovieToEdit(movie);
     };
 
-    const sort = useCallback((a, b) => {
-        if (a[sortBy] > b[sortBy]) {
-            return 1;
-        }
-
-        if (a[sortBy] < b[sortBy]) {
-            return -1;
-        }
-
-        return 0;
-    }, [sortBy]);
-
-    let moviesToShow = movies.sort(sort);
-
     let modal = ''
     if (movieToEdit) {
         modal = <AddEditModal isVisible={editModalShown} movie={movieToEdit} closeModal={toggleEditModalWithSet} />
@@ -60,13 +45,13 @@ const MovieContainer = ({ movies, filter, selectMovie, setFilter }) => {
             <div className="movieContainer">
                 <div className="filters">
                     <CategoryFilter filter={filter} setCategoryFilter={setFilter} />
-                    <SearchSorter sortBy={sortBy} setSortBy={setSortBy} />
+                    <SearchSorter sortBy={sort} setSortBy={setSort} />
                 </div>
                 <div className="searchCount">
-                    <span>{moviesToShow.length}</span> movies found
+                    <span>{totalMovies}</span> movies found
                 </div>
                 <div className="searchResults">
-                    {moviesToShow.map(movie => {
+                    {movies.map(movie => {
                         return (
                             <Movie
                                 key={movie.id}
@@ -89,12 +74,16 @@ const MovieContainer = ({ movies, filter, selectMovie, setFilter }) => {
 const mapStateToProps = state => {
     const movies = getMovies(state);
     const filter = getFilterBy(state);
-    return { movies, filter }
+    const sort = getSortBy(state);
+    const totalMovies = getTotalMovies(state);
+    
+    return { movies, filter, sort, totalMovies }
 };
 
 const mapDispatchToProps = dispatch => ({
     selectMovie: (movie) => dispatch(selectMovie(movie)),
-    setFilter: filter => dispatch(setFilter(filter))
+    setFilter: filter => dispatch(setFilter(filter)),
+    setSort: sort => dispatch(setSort(sort))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer);

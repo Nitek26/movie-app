@@ -56,6 +56,12 @@ const movieReducer = (state = {}, action) => {
                 filterBy: action.payload.filterBy
             };
         }
+        case ACTIONS.SET_SORT: {
+            return {
+                ...state,
+                sortBy: action.payload.sortBy
+            };
+        }
         default: {
             return state;
         }

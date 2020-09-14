@@ -40,6 +40,13 @@ const setFilter = filterBy => ({
     }
 });
 
+const setSort = sortBy => ({
+    type: ACTIONS.SET_SORT,
+    payload:{
+        sortBy
+    }
+});
+
 export { 
     loadMoviesInProgress, 
     loadMoviesSuccess, 
@@ -47,5 +54,6 @@ export {
     setAddModalVisbility, 
     selectMovie, 
     deselectMovie,
-    setFilter 
+    setFilter,
+    setSort 
 };

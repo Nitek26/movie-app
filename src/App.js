@@ -8,15 +8,15 @@ import MovieDetails from './header/movieDetails';
 
 import { loadMovies } from './utils/store/thunks'
 import { deselectMovie } from './utils/store/actions'
-import { getAreMoviesLoading, getMovies, getSelectedMovie, getFilterBy } from './utils/store/selectors'
+import { getAreMoviesLoading, getMovies, getSelectedMovie, getFilterBy, getSortBy } from './utils/store/selectors'
 
 import './App.css';
 
-function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovie, filter }) {
+function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovie, filter, sort }) {
 
   useEffect(() => {
-    startLoadingMovies(filter);
-  }, [startLoadingMovies, filter]);
+    startLoadingMovies(filter, sort);
+  }, [startLoadingMovies, filter, sort]);
 
   return (
     areMoviesLoading ?
@@ -36,17 +36,19 @@ const mapStateToProps = state => {
   const movies = getMovies(state);
   const selectedMovie = getSelectedMovie(state);
   const filter = getFilterBy(state);
-  
+  const sort = getSortBy(state);
+
   return { 
     areMoviesLoading, 
     movies,
     selectedMovie,
-    filter
+    filter,
+    sort
    }
 };
 
 const mapDispatchToProps = dispatch => ({
-  startLoadingMovies: (filter) => dispatch(loadMovies(filter)),
+  startLoadingMovies: (filter, sort) => dispatch(loadMovies(filter, sort)),
   deselectMovie: () => dispatch(deselectMovie())
 });
 

@@ -12,15 +12,9 @@ const initialState = {
         areMoviesLoading: false,
         movies:[],
         totalMovies: 0,
-        filterBy: 'all'
+        filterBy: 'all',
+        sortBy: 'release_date'
     }
-    // selectedMovie: undefined,
-    // modalOpened:[],
-    // confirmModalShown: false,
-    // editModalShown: false,
-    // movieToEdit: undefined,
-    // categoryFilter: 'all',
-    // sortBy:'release_date',
 };
 
 const rootReducer = combineReducers({

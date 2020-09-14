@@ -3,10 +3,10 @@ import {
     loadMoviesSuccess, 
     loadMoviesFailure} from './actions';
 
-export const loadMovies = (filter) => async (dispatch) => {
+export const loadMovies = (filter, sort) => async (dispatch) => {
     try {
         dispatch(loadMoviesInProgress());
-        let url = 'http://localhost:4000/movies?searchBy=title&limit=12';
+        let url = `http://localhost:4000/movies?limit=12&sortBy=${sort}&sortOrder=asc`;
         if(filter !== 'all'){
             url = url + `&filter=${filter}`;
         }
