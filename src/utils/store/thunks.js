@@ -3,10 +3,14 @@ import {
     loadMoviesSuccess, 
     loadMoviesFailure} from './actions';
 
-export const loadMovies = () => async (dispatch) => {
+export const loadMovies = (filter) => async (dispatch) => {
     try {
         dispatch(loadMoviesInProgress());
-        const response =  await fetch('http://localhost:4000/movies?searchBy=title&limit=12');
+        let url = 'http://localhost:4000/movies?searchBy=title&limit=12';
+        if(filter !== 'all'){
+            url = url + `&filter=${filter}`;
+        }
+        const response =  await fetch(url);
         const movies =  await response.json();
 
         dispatch(loadMoviesSuccess(movies));

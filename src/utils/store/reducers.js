@@ -36,7 +36,6 @@ const movieReducer = (state = {}, action) => {
                 areMoviesLoading: true
             };
         }
-
         case ACTIONS.LOAD_MOVIES_SUCCESS: {
             return {
                 ...state,
@@ -45,12 +44,16 @@ const movieReducer = (state = {}, action) => {
                 totalMovies: action.payload.movies.totalAmount
             }; 
         }
-
         case ACTIONS.LOAD_MOVIES_FAILURE: {
-            console.log("fail");
             return {
                 ...state,
                 areMoviesLoading: false
+            };
+        }
+        case ACTIONS.SET_FILTER: {
+            return {
+                ...state,
+                filterBy: action.payload.filterBy
             };
         }
         default: {

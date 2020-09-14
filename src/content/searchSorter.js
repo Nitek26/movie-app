@@ -6,6 +6,8 @@ const SearchSorter = (props) => {
     const options = [
         { value: 'release_date', title: 'Release Date' },
         { value: 'title', title: 'Title' },
+        { value: 'genres', title: 'Genre' },
+        { value: 'vote_average', title: 'Rating' },
     ];
 
     return (

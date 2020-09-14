@@ -11,7 +11,8 @@ const initialState = {
     movieReducer: {
         areMoviesLoading: false,
         movies:[],
-        totalMovies: 0
+        totalMovies: 0,
+        filterBy: 'all'
     }
     // selectedMovie: undefined,
     // modalOpened:[],

@@ -7,16 +7,16 @@ import MovieSearch from './header/movieSearch';
 import MovieDetails from './header/movieDetails';
 
 import { loadMovies } from './utils/store/thunks'
-import { selectMovie, deselectMovie } from './utils/store/actions'
-import { getAreMoviesLoading, getMovies, getSelectedMovie } from './utils/store/selectors'
+import { deselectMovie } from './utils/store/actions'
+import { getAreMoviesLoading, getMovies, getSelectedMovie, getFilterBy } from './utils/store/selectors'
 
 import './App.css';
 
-function App({ startLoadingMovies, areMoviesLoading, movies, selectMovie, deselectMovie, selectedMovie }) {
+function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovie, filter }) {
 
   useEffect(() => {
-    startLoadingMovies();
-  }, [startLoadingMovies]);
+    startLoadingMovies(filter);
+  }, [startLoadingMovies, filter]);
 
   return (
     areMoviesLoading ?
@@ -26,7 +26,7 @@ function App({ startLoadingMovies, areMoviesLoading, movies, selectMovie, desele
       :
       (<div className="app">
         {selectedMovie ? <MovieDetails movie={selectedMovie} onSearchClicked={deselectMovie} /> : <MovieSearch />}
-        <MovieContainer selectMovie={selectMovie} movies={movies} />
+        <MovieContainer />
         <MovieFooter />
       </div>));
 }
@@ -35,17 +35,18 @@ const mapStateToProps = state => {
   const areMoviesLoading = getAreMoviesLoading(state);
   const movies = getMovies(state);
   const selectedMovie = getSelectedMovie(state);
+  const filter = getFilterBy(state);
   
   return { 
     areMoviesLoading, 
     movies,
-    selectedMovie
+    selectedMovie,
+    filter
    }
 };
 
 const mapDispatchToProps = dispatch => ({
-  startLoadingMovies: () => dispatch(loadMovies()),
-  selectMovie: (movie) => dispatch(selectMovie(movie)),
+  startLoadingMovies: (filter) => dispatch(loadMovies(filter)),
   deselectMovie: () => dispatch(deselectMovie())
 });
 

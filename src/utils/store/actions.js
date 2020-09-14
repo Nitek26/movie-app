@@ -33,11 +33,19 @@ const deselectMovie = () => ({
     type: ACTIONS.DESELECT_MOVIE
 });
 
+const setFilter = filterBy => ({
+    type: ACTIONS.SET_FILTER,
+    payload:{
+        filterBy
+    }
+});
+
 export { 
     loadMoviesInProgress, 
     loadMoviesSuccess, 
     loadMoviesFailure, 
     setAddModalVisbility, 
     selectMovie, 
-    deselectMovie 
+    deselectMovie,
+    setFilter 
 };

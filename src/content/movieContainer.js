@@ -10,16 +10,18 @@ import AddEditModal from '../modals/addEditModal';
 
 import useToggle from '../utils/useToggle'
 
-import { getMovies } from '../utils/store/selectors'
+import { getMovies, getFilterBy } from '../utils/store/selectors'
+import { setFilter, selectMovie } from '../utils/store/actions';
 
 import './movieContainer.css';
 
-const MovieContainer = ({ movies }) => {
+
+
+const MovieContainer = ({ movies, filter, selectMovie, setFilter }) => {
     const [modalOpened, setModalOpened] = useState([]);
     const [confirmModalShown, toggleConfirmDeleteModal] = useToggle(false);
     const [editModalShown, toggleEditModal] = useToggle(false);
     const [movieToEdit, setMovieToEdit] = useState(undefined);
-    const [categoryFilter, setCategoryFilter] = useState('all');
     const [sortBy, setSortBy] = useState('release_date');
 
     const toggleDropdownModal = useCallback((id) => {
@@ -46,15 +48,7 @@ const MovieContainer = ({ movies }) => {
         return 0;
     }, [sortBy]);
 
-    let moviesToShow = movies.filter(movie => {
-        if (categoryFilter === 'all') {
-            return true;
-        } else {
-            return movie.genres.map(genre => genre.toLowerCase()).includes(categoryFilter);
-        }
-    });
-
-    moviesToShow = moviesToShow.sort(sort);
+    let moviesToShow = movies.sort(sort);
 
     let modal = ''
     if (movieToEdit) {
@@ -65,7 +59,7 @@ const MovieContainer = ({ movies }) => {
         <>
             <div className="movieContainer">
                 <div className="filters">
-                    <CategoryFilter filter={categoryFilter} setCategoryFilter={setCategoryFilter} />
+                    <CategoryFilter filter={filter} setCategoryFilter={setFilter} />
                     <SearchSorter sortBy={sortBy} setSortBy={setSortBy} />
                 </div>
                 <div className="searchCount">
@@ -81,7 +75,7 @@ const MovieContainer = ({ movies }) => {
                                 modalOpened={modalOpened.includes(movie.id)}
                                 toggleConfirmDeleteModal={toggleConfirmDeleteModal}
                                 toggleEditModal={toggleEditModalWithSet}
-                                selectMovie={() => {}} />
+                                selectMovie={selectMovie} />
                         );
                     })}
                 </div>
@@ -94,12 +88,13 @@ const MovieContainer = ({ movies }) => {
 
 const mapStateToProps = state => {
     const movies = getMovies(state);
-  
-      return { movies }
-  };
-  
-//   const mapDispatchToProps = dispatch => ({
-//     startLoadingMovies: () => dispatch(loadMovies())
-//   });
+    const filter = getFilterBy(state);
+    return { movies, filter }
+};
 
-export default connect(mapStateToProps, null)(MovieContainer);
+const mapDispatchToProps = dispatch => ({
+    selectMovie: (movie) => dispatch(selectMovie(movie)),
+    setFilter: filter => dispatch(setFilter(filter))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer);
