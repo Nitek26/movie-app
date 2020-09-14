@@ -8,7 +8,7 @@ export const getDeleteConfirmationOpenedFor = store => store.viewReducer.deleteC
 
 export const getAreMoviesLoading = store => store.movieReducer.areMoviesLoading;
 
-export const getNeedsReload = store => store.movieReducer.needsReload;
+export const getOperationCounter = store => store.movieReducer.operationCounter;
 
 export const getMovies = store => store.movieReducer.movies;
 

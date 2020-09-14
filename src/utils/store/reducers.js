@@ -90,7 +90,8 @@ const movieReducer = (state = {}, action) => {
         }
         case ACTIONS.MOVIES_CHANGED: {
             return {
-                ...state
+                ...state,
+                operationCounter: state.operationCounter + 1
             }
         }
         default: {

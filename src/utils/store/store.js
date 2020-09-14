@@ -12,7 +12,7 @@ const initialState = {
     },
     movieReducer: {
         areMoviesLoading: false,
-        needsReload: true,
+        operationCounter: 0,
         movies:[],
         totalMovies: 0,
         filterBy: 'all',

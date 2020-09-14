@@ -8,15 +8,15 @@ import MovieDetails from './header/movieDetails';
 
 import { loadMovies } from './utils/store/thunks'
 import { deselectMovie } from './utils/store/actions'
-import { getAreMoviesLoading, getMovies, getSelectedMovie, getFilterBy, getSortBy, getNeedsReload } from './utils/store/selectors'
+import { getAreMoviesLoading, getMovies, getSelectedMovie, getFilterBy, getSortBy, getOperationCounter } from './utils/store/selectors'
 
 import './App.css';
 
-function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovie, filter, sort, needsReload }) {
+function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovie, filter, sort, operationCounter }) {
 
   useEffect(() => {
       startLoadingMovies(filter, sort);
-  }, [startLoadingMovies, filter, sort, needsReload]);
+  }, [startLoadingMovies, filter, sort, operationCounter]);
 
   return (
     areMoviesLoading ?
@@ -33,7 +33,7 @@ function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovi
 
 const mapStateToProps = state => {
   const areMoviesLoading = getAreMoviesLoading(state);
-  const needsReload = getNeedsReload(state);
+  const operationCounter = getOperationCounter(state);
   const movies = getMovies(state);
   const selectedMovie = getSelectedMovie(state);
   const filter = getFilterBy(state);
@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 
   return { 
     areMoviesLoading,
-    needsReload, 
+    operationCounter, 
     movies,
     selectedMovie,
     filter,
