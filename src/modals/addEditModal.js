@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getMovieToEdit } from '../utils/store/selectors';
+import { getMovieToEdit, getInitialMovie } from '../utils/store/selectors';
 import { movieValueChanged, resetMovie } from '../utils/store/actions';
-import { addMovie } from '../utils/store/thunks';
+import { addMovie, editMovie } from '../utils/store/thunks';
 
 import './addEditModal.css'
 
-const AddEditModal = ({ movie, closeModal, isVisible, movieValueChanged, addMovie, resetMovie }) => {
+const AddEditModal = ({ movie, initialMovie, closeModal, isVisible, movieValueChanged, addMovie, resetMovie, editMovie }) => {
 
     const genres = [
         "Adventure",
@@ -35,25 +35,25 @@ const AddEditModal = ({ movie, closeModal, isVisible, movieValueChanged, addMovi
         if (event.target.name === 'runtime') {
             value = parseInt(value, 10);
         }
-        
+
         movieValueChanged(event.target.name, value);
     };
 
     const reset = () => {
-        isEditMode
-            ? console.log('reset')
-            : resetMovie({
-                title: '',
-                overview: '',
-                release_date: '',
-                runtime: '',
-                genres: [],
-                poster_path: ''
-            });
+        let initialData = isEditMode ? initialMovie : {
+            title: '',
+            overview: '',
+            release_date: '',
+            runtime: '',
+            genres: [],
+            poster_path: ''
+        };
+        
+        resetMovie(initialData);
     }
 
     const submit = () => {
-        isEditMode ? closeModal() : addMovie(movie);
+        isEditMode ? editMovie(movie) : addMovie(movie);
     };
 
     return (
@@ -111,13 +111,15 @@ AddEditModal.propTypes = {
 
 const mapStateToProps = state => {
     const movie = getMovieToEdit(state);
+    const initialMovie = getInitialMovie(state);
 
-    return { movie }
+    return { movie, initialMovie }
 };
 
 const mapDispatchToProps = dispatch => ({
     movieValueChanged: (name, value, isArray = false) => dispatch(movieValueChanged(name, value, isArray)),
     addMovie: (movie) => dispatch(addMovie(movie)),
+    editMovie: (movie) => dispatch(editMovie(movie)),
     resetMovie: (movie) => dispatch(resetMovie(movie))
 });
 

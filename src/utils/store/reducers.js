@@ -42,11 +42,19 @@ const viewReducer = (state = {}, action) => {
                 optionsOpenedFor: 0
             }
         }
+        case ACTIONS.SET_EDIT_MODAL_VISIBILITY: {
+            const editModalVisible = action.payload.movie ? !!(action.payload.movie.id) : false;
+            return {
+                ...state,
+                editModalVisible
+            }
+        }
         case ACTIONS.MOVIES_CHANGED: {
             return {
                 ...state,
                 deleteConfirmationOpenedFor: 0,
-                addModalVisible: false
+                addModalVisible: false,
+                editModalVisible: false
             }
         }
         default: {
@@ -105,7 +113,7 @@ const movieReducer = (state = {}, action) => {
             return {
                 ...state,
                 operationCounter: state.operationCounter + 1,
-                
+                movieToEdit: { ...emptyMovie }
             }
         }
         case ACTIONS.RESET_MOVIE: {
@@ -119,10 +127,11 @@ const movieReducer = (state = {}, action) => {
             }
         }
         case ACTIONS.SET_EDIT_MODAL_VISIBILITY: {
-            const movie = action.payload.movie ? action.payload.movie : emptyMovie;
+            const movie = action.payload.movie ? action.payload.movie : { ...emptyMovie };
             return {
                 ...state,
-                movieToEdit: movie 
+                movieToEdit: movie, 
+                initialMovie: { ...movie } 
             }
         }
         default: {

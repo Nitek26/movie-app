@@ -6,10 +6,10 @@ import { viewReducer, movieReducer } from './reducers';
 const initialState = {
     viewReducer: {
         addModalVisible: false,
+        editModalVisible: false,
         selectedMovie: undefined,
         optionsOpenedFor: 0,
-        deleteConfirmationOpenedFor: 0,
-        editModalOpenedFor: undefined
+        deleteConfirmationOpenedFor: 0
     },
     movieReducer: {
         areMoviesLoading: false,

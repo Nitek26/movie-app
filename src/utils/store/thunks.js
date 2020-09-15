@@ -66,3 +66,27 @@ export const addMovie = (movie) => async (dispatch) => {
     }
 };
 
+export const editMovie = (movie) => async (dispatch) => {
+    try {
+        let url = `http://localhost:4000/movies/`;
+        const response =  await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(movie),
+            headers: {
+                'Content-Type': 'application/json'
+              }
+        });
+    
+        if(response.status === 200) {
+            dispatch(moviesChanged());
+            return;
+        }
+
+        alert('Error');
+
+        
+    } catch (error) {
+        alert('Error');
+    }
+};
+
