@@ -105,20 +105,7 @@ const movieReducer = (state = {}, action) => {
             return {
                 ...state,
                 operationCounter: state.operationCounter + 1,
-                movieToEdit: {
-                    title: '',
-                    tagline: 'New movie',
-                    vote_average: 0,
-                    vote_count: 0,
-                    release_date: '',
-                    poster_path: '',
-                    overview: '',
-                    budget: 1000,
-                    revenue: 2000,
-                    genres: [
-                    ],
-                    runtime: ''
-                }
+                
             }
         }
         case ACTIONS.RESET_MOVIE: {
@@ -131,10 +118,32 @@ const movieReducer = (state = {}, action) => {
                 movieToEdit: movieToEdit
             }
         }
+        case ACTIONS.SET_EDIT_MODAL_VISIBILITY: {
+            const movie = action.payload.movie ? action.payload.movie : emptyMovie;
+            return {
+                ...state,
+                movieToEdit: movie 
+            }
+        }
         default: {
             return state;
         }
     }
+};
+
+const emptyMovie = {
+    title: '',
+    tagline: 'New movie',
+    vote_average: 0,
+    vote_count: 0,
+    release_date: '',
+    poster_path: '',
+    overview: '',
+    budget: 1000,
+    revenue: 2000,
+    genres: [
+    ],
+    runtime: ''
 };
 
 export { viewReducer, movieReducer };

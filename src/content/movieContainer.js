@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 
@@ -8,10 +8,8 @@ import Movie from './movie';
 import DeleteConfirmation from '../modals/deleteConfirmation';
 import AddEditModal from '../modals/addEditModal';
 
-import useToggle from '../utils/useToggle'
-
-import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor } from '../utils/store/selectors'
-import { setFilter, setSort, selectMovie, showOptions, hideOptions, setDeleteModalVisbility } from '../utils/store/actions';
+import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor, getEditModalVisible } from '../utils/store/selectors'
+import { setFilter, setSort, selectMovie, showOptions, hideOptions, setDeleteModalVisbility, setEditModalVisbility } from '../utils/store/actions';
 import { deleteMovie } from '../utils/store/thunks';
 
 import './movieContainer.css';
@@ -30,19 +28,14 @@ const MovieContainer = ({
     deleteConfirmationOpenedFor,
     showDeleteConfirmModal, 
     hideDeleteConfirmModal,
-    deleteMovie 
+    deleteMovie,
+    showEditModal, 
+    closeEditModal,
+    editModalVisible 
 }) => {
-    const [editModalShown, toggleEditModal] = useToggle(false);
-    const [movieToEdit, setMovieToEdit] = useState(undefined);
-
-    const toggleEditModalWithSet = (movie) => {
-        toggleEditModal(editModalShown);
-        setMovieToEdit(movie);
-    };
-
     let modal = ''
-    if (movieToEdit) {
-        modal = <AddEditModal isVisible={editModalShown} movie={movieToEdit} closeModal={toggleEditModalWithSet} />
+    if (editModalVisible) {
+        modal = <AddEditModal isVisible={editModalVisible} closeModal={closeEditModal} />
     }
 
     return (
@@ -65,7 +58,7 @@ const MovieContainer = ({
                                 hideOptions={hideOptions}
                                 modalOpened={optionsOpenFor === movie.id}
                                 deleteMovie={showDeleteConfirmModal}
-                                toggleEditModal={toggleEditModalWithSet}
+                                showEditModal={showEditModal}
                                 selectMovie={selectMovie} />
                         );
                     })}
@@ -89,8 +82,9 @@ const mapStateToProps = state => {
     const totalMovies = getTotalMovies(state);
     const optionsOpenFor = getOptionsOpenedFor(state);
     const deleteConfirmationOpenedFor = getDeleteConfirmationOpenedFor(state);
+    const editModalVisible = getEditModalVisible(state);
 
-    return { movies, filter, sort, totalMovies, optionsOpenFor, deleteConfirmationOpenedFor }
+    return { movies, filter, sort, totalMovies, optionsOpenFor, deleteConfirmationOpenedFor, editModalVisible }
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -102,6 +96,8 @@ const mapDispatchToProps = dispatch => ({
     showDeleteConfirmModal: (id) => dispatch(setDeleteModalVisbility(id)),
     hideDeleteConfirmModal: () => dispatch(setDeleteModalVisbility(0)),
     deleteMovie: (id) => dispatch(deleteMovie(id)),
+    showEditModal: (movie) => dispatch(setEditModalVisbility(movie)),
+    closeEditModal: () => dispatch(setEditModalVisbility()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer);

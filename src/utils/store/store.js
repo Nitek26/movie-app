@@ -8,7 +8,8 @@ const initialState = {
         addModalVisible: false,
         selectedMovie: undefined,
         optionsOpenedFor: 0,
-        deleteConfirmationOpenedFor: 0
+        deleteConfirmationOpenedFor: 0,
+        editModalOpenedFor: undefined
     },
     movieReducer: {
         areMoviesLoading: false,

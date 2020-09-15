@@ -11,8 +11,8 @@ const Movie = (props) => {
     }, [props]);
 
     const openEditModal = useCallback((movie) => {
-        props.toggleDropdownModal(movie.id);
-        props.toggleEditModal(movie);
+        props.hideOptions();
+        props.showEditModal(movie);
     }, [props]);
 
     return (
@@ -51,7 +51,7 @@ Movie.propTypes = {
     hideOptions: PropTypes.func.isRequired,
     modalOpened: PropTypes.bool.isRequired,
     deleteMovie: PropTypes.func.isRequired,
-    toggleEditModal: PropTypes.func.isRequired
+    showEditModal: PropTypes.func.isRequired
 };
 
 export default Movie;

@@ -69,7 +69,14 @@ export const setAddModalVisbility = (visible) => ({
     }
 });
 
-export const setDeleteModalVisbility = (id, visible) => ({
+export const setEditModalVisbility = (movie) => ({
+    type: ACTIONS.SET_EDIT_MODAL_VISIBILITY,
+    payload:{
+        movie
+    }
+});
+
+export const setDeleteModalVisbility = (id) => ({
     type: ACTIONS.SET_DELETE_MODAL_VISIBILITY,
     payload:{
         id

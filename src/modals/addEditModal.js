@@ -35,6 +35,7 @@ const AddEditModal = ({ movie, closeModal, isVisible, movieValueChanged, addMovi
         if (event.target.name === 'runtime') {
             value = parseInt(value, 10);
         }
+        
         movieValueChanged(event.target.name, value);
     };
 
