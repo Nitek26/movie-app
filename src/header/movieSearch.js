@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AddEditModal from '../modals/addEditModal';
-import { setAddModalVisbility } from '../utils/store/actions'
-import { getAddModalVisbility } from '../utils/store/selectors'
+import { setAddModalVisbility } from '../store/actions'
+import { getAddModalVisbility } from '../store/selectors'
 
 import './movieSearch.css';
 

@@ -6,9 +6,9 @@ import MovieFooter from './footer/movieFooter';
 import MovieSearch from './header/movieSearch';
 import MovieDetails from './header/movieDetails';
 
-import { loadMovies } from './utils/store/thunks'
-import { deselectMovie } from './utils/store/actions'
-import { getAreMoviesLoading, getMovies, getSelectedMovie, getFilterBy, getSortBy, getOperationCounter } from './utils/store/selectors'
+import { loadMovies } from './store/thunks'
+import { deselectMovie } from './store/actions'
+import { getAreMoviesLoading, getMovies, getSelectedMovie, getFilterBy, getSortBy, getOperationCounter } from './store/selectors'
 
 import './App.css';
 

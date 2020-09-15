@@ -8,9 +8,9 @@ import Movie from './movie';
 import DeleteConfirmation from '../modals/deleteConfirmation';
 import AddEditModal from '../modals/addEditModal';
 
-import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor, getEditModalVisible } from '../utils/store/selectors'
-import { setFilter, setSort, selectMovie, showOptions, hideOptions, setDeleteModalVisbility, setEditModalVisbility } from '../utils/store/actions';
-import { deleteMovie } from '../utils/store/thunks';
+import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor, getEditModalVisible } from '../store/selectors'
+import { setFilter, setSort, selectMovie, showOptions, hideOptions, setDeleteModalVisbility, setEditModalVisbility } from '../store/actions';
+import { deleteMovie } from '../store/thunks';
 
 import './movieContainer.css';
 

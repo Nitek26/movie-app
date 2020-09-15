@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getMovieToEdit, getInitialMovie } from '../utils/store/selectors';
-import { movieValueChanged, resetMovie } from '../utils/store/actions';
-import { addMovie, editMovie } from '../utils/store/thunks';
+import { getMovieToEdit, getInitialMovie } from '../store/selectors';
+import { movieValueChanged, resetMovie } from '../store/actions';
+import { addMovie, editMovie } from '../store/thunks';
 
 import './addEditModal.css'
 

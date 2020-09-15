@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import './index.css';
 import App from './App';
 import ErrorBoundary from './errorBoundary';
-import { configureStore } from './utils/store/store'
+import { configureStore } from './store/store'
 import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
