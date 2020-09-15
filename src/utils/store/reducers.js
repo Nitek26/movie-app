@@ -1,7 +1,7 @@
 import ACTIONS from './actionTypes'
 
 const viewReducer = (state = {}, action) => {
-    switch(action.type){
+    switch (action.type) {
         case ACTIONS.SET_ADD_MODAL_VISIBILITY: {
             const visible = action.payload.visible;
 
@@ -45,7 +45,8 @@ const viewReducer = (state = {}, action) => {
         case ACTIONS.MOVIES_CHANGED: {
             return {
                 ...state,
-                deleteConfirmationOpenedFor: 0
+                deleteConfirmationOpenedFor: 0,
+                addModalVisible: false
             }
         }
         default: {
@@ -55,7 +56,7 @@ const viewReducer = (state = {}, action) => {
 };
 
 const movieReducer = (state = {}, action) => {
-    switch(action.type){
+    switch (action.type) {
         case ACTIONS.LOAD_MOVIES_IN_PROGRESS: {
             return {
                 ...state,
@@ -68,7 +69,7 @@ const movieReducer = (state = {}, action) => {
                 areMoviesLoading: false,
                 movies: action.payload.movies.data,
                 totalMovies: action.payload.movies.totalAmount
-            }; 
+            };
         }
         case ACTIONS.LOAD_MOVIES_FAILURE: {
             return {
@@ -88,10 +89,46 @@ const movieReducer = (state = {}, action) => {
                 sortBy: action.payload.sortBy
             };
         }
+        case ACTIONS.MOVIE_VALUE_CHANGED: {
+            const { name, value } = action.payload;
+            const movieToEdit = {
+                ...state.movieToEdit,
+                [name]: value
+            }
+
+            return {
+                ...state,
+                movieToEdit: movieToEdit
+            }
+        }
         case ACTIONS.MOVIES_CHANGED: {
             return {
                 ...state,
-                operationCounter: state.operationCounter + 1
+                operationCounter: state.operationCounter + 1,
+                movieToEdit: {
+                    title: '',
+                    tagline: 'New movie',
+                    vote_average: 0,
+                    vote_count: 0,
+                    release_date: '',
+                    poster_path: '',
+                    overview: '',
+                    budget: 1000,
+                    revenue: 2000,
+                    genres: [
+                    ],
+                    runtime: ''
+                }
+            }
+        }
+        case ACTIONS.RESET_MOVIE: {
+            const movieToEdit = {
+                ...state.movieToEdit,
+                ...action.payload.movie
+            }
+            return {
+                ...state,
+                movieToEdit: movieToEdit
             }
         }
         default: {

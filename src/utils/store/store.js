@@ -16,7 +16,21 @@ const initialState = {
         movies:[],
         totalMovies: 0,
         filterBy: 'all',
-        sortBy: 'release_date'
+        sortBy: 'release_date',
+        movieToEdit: {
+            title: '',
+            tagline: 'New movie',
+            vote_average: 0,
+            vote_count: 0,
+            release_date: '',
+            poster_path: '',
+            overview: '',
+            budget: 1000,
+            revenue: 2000,
+            genres: [
+            ],
+            runtime: ''
+        }
     }
 };
 
