@@ -24,7 +24,7 @@ const AddEditModal = ({ movie, closeModal, isVisible, addMovie, editMovie }) => 
         "Documentary"
     ];
 
-    const closeAndReset = (resetForm) =>{
+    const closeAndReset = (resetForm) => {
         resetForm({});
         closeModal();
     }
@@ -70,22 +70,22 @@ const AddEditModal = ({ movie, closeModal, isVisible, addMovie, editMovie }) => 
                                         <input type="text" name="id" defaultValue={movie.id} disabled="disabled" />
                                     </label>) : ''}
                                     <label> title
-                                <Field type="text" name="title"></Field>
+                                        <Field type="text" name="title"></Field>
                                     </label>
                                     <ErrorMessage name="title" component="div" />
 
                                     <label> release date
-                                <Field type="text" name="release_date"></Field>
+                                        <Field type="text" name="release_date"></Field>
                                     </label>
                                     <ErrorMessage name="release_date" component="div" />
 
                                     <label> movie url
-                                <Field type="text" name="poster_path"></Field>
+                                        <Field type="text" name="poster_path"></Field>
                                     </label>
                                     <ErrorMessage name="poster_path" component="div" />
 
                                     <label> genre
-                                <Field as="select" size="1" name="genres" multiple="multiple">
+                                        <Field as="select" size="1" name="genres" multiple="multiple">
                                             {genres.map((genre) => {
                                                 return <option key={genre} value={genre}>{genre}</option>
                                             })}
@@ -94,12 +94,12 @@ const AddEditModal = ({ movie, closeModal, isVisible, addMovie, editMovie }) => 
                                     <ErrorMessage name="genres" component="div" />
 
                                     <label> overview
-                                <Field type="text" name="overview" />
+                                        <Field type="text" name="overview" />
                                     </label>
                                     <ErrorMessage name="overview" component="div" />
 
                                     <label> runtime
-                                <Field type="number" name="runtime" />
+                                        <Field type="number" name="runtime" />
                                     </label>
                                     <ErrorMessage name="runtime" component="div" />
                                 </div>
