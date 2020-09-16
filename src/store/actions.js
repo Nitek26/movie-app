@@ -29,23 +29,8 @@ export const addMovie = (movie) => ({
     }
 });
 
-export const movieValueChanged = (name, value) => ({
-    type: ACTIONS.MOVIE_VALUE_CHANGED,
-    payload:{
-        name,
-        value
-    }
-});
-
 export const moviesChanged = () => ({
     type: ACTIONS.MOVIES_CHANGED
-});
-
-export const resetMovie = (movie) => ({
-    type: ACTIONS.RESET_MOVIE,
-    payload:{
-        movie
-    }
 });
 
 export const setFilter = filterBy => ({

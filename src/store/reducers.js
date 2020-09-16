@@ -97,33 +97,11 @@ const movieReducer = (state = {}, action) => {
                 sortBy: action.payload.sortBy
             };
         }
-        case ACTIONS.MOVIE_VALUE_CHANGED: {
-            const { name, value } = action.payload;
-            const movieToEdit = {
-                ...state.movieToEdit,
-                [name]: value
-            }
-
-            return {
-                ...state,
-                movieToEdit: movieToEdit
-            }
-        }
         case ACTIONS.MOVIES_CHANGED: {
             return {
                 ...state,
                 operationCounter: state.operationCounter + 1,
                 movieToEdit: { ...emptyMovie }
-            }
-        }
-        case ACTIONS.RESET_MOVIE: {
-            const movieToEdit = {
-                ...state.movieToEdit,
-                ...action.payload.movie
-            }
-            return {
-                ...state,
-                movieToEdit: movieToEdit
             }
         }
         case ACTIONS.SET_EDIT_MODAL_VISIBILITY: {
