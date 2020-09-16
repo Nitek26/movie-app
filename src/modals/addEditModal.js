@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 
 import { getMovieToEdit } from '../store/selectors';
 import { addMovie, editMovie } from '../store/thunks';
+import { FormItem } from './formItem'
 
 import './addEditModal.css'
 
@@ -69,20 +70,10 @@ const AddEditModal = ({ movie, closeModal, isVisible, addMovie, editMovie }) => 
                                     {isEditMode ? (<label> movie id
                                         <input type="text" name="id" defaultValue={movie.id} disabled="disabled" />
                                     </label>) : ''}
-                                    <label> title
-                                        <Field type="text" name="title"></Field>
-                                    </label>
-                                    <ErrorMessage name="title" component="div" />
 
-                                    <label> release date
-                                        <Field type="text" name="release_date"></Field>
-                                    </label>
-                                    <ErrorMessage name="release_date" component="div" />
-
-                                    <label> movie url
-                                        <Field type="text" name="poster_path"></Field>
-                                    </label>
-                                    <ErrorMessage name="poster_path" component="div" />
+                                    <FormItem type="text" name="title" label="title" />
+                                    <FormItem type="text" name="release_date" label="release date" />
+                                    <FormItem type="text" name="poster_path" label="movie url" />
 
                                     <label> genre
                                         <Field as="select" size="1" name="genres" multiple="multiple">
@@ -93,15 +84,8 @@ const AddEditModal = ({ movie, closeModal, isVisible, addMovie, editMovie }) => 
                                     </label>
                                     <ErrorMessage name="genres" component="div" />
 
-                                    <label> overview
-                                        <Field type="text" name="overview" />
-                                    </label>
-                                    <ErrorMessage name="overview" component="div" />
-
-                                    <label> runtime
-                                        <Field type="number" name="runtime" />
-                                    </label>
-                                    <ErrorMessage name="runtime" component="div" />
+                                    <FormItem type="text" name="overview" label="overview" />
+                                    <FormItem type="number" name="runtime" label="runtime" />
                                 </div>
                                 <div className="buttons">
                                     <button className="reset" type="reset" onClick={() => resetForm(initialValues)}>reset</button>
