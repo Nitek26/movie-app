@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup'
 
-import { getMovieToEdit, getInitialMovie } from '../store/selectors';
-import { movieValueChanged, resetMovie } from '../store/actions';
+import { getMovieToEdit } from '../store/selectors';
 import { addMovie, editMovie } from '../store/thunks';
 
 import './addEditModal.css'
 
-const AddEditModal = ({ movie, initialMovie, closeModal, isVisible, movieValueChanged, addMovie, resetMovie, editMovie }) => {
+const AddEditModal = ({ movie, closeModal, isVisible, addMovie, editMovie }) => {
 
     const genres = [
         "Adventure",
@@ -23,82 +24,93 @@ const AddEditModal = ({ movie, initialMovie, closeModal, isVisible, movieValueCh
         "Documentary"
     ];
 
-    const isEditMode = !!movie.id;
-
-    const handleChange = (event) => {
-        let value = event.target.value;
-
-        if (event.target.name === 'genres') {
-            value = [...event.target.selectedOptions].map(o => o.value);
-        }
-
-        if (event.target.name === 'runtime') {
-            value = parseInt(value, 10);
-        }
-
-        movieValueChanged(event.target.name, value);
-    };
-
-    const reset = () => {
-        let initialData = isEditMode ? initialMovie : {
-            title: '',
-            overview: '',
-            release_date: '',
-            runtime: '',
-            genres: [],
-            poster_path: ''
-        };
-        
-        resetMovie(initialData);
+    const closeAndReset = (resetForm) =>{
+        resetForm({});
+        closeModal();
     }
 
-    const submit = () => {
-        isEditMode ? editMovie(movie) : addMovie(movie);
-    };
+    const isEditMode = !!movie.id;
+
+    const signupSchema = Yup.object().shape({
+        title: Yup.string()
+            .required('Title is required'),
+        release_date: Yup.string()
+            .required('Release date is required')
+            .matches(/^(\d{4})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/, { excludeEmptyString: true, message: 'Date must be in format YYYY-MM-DD' }),
+        poster_path: Yup.string()
+            .required('Poster path is required')
+            .url(),
+        genres: Yup.array()
+            .min(1, 'Select at least one genre'),
+        overview: Yup.string()
+            .required('Overview is required'),
+        runtime: Yup.number()
+            .required('Runtime is required')
+            .min(1, 'Runtime must be at least 1 minute'),
+    });
+
+    const initialValues = { ...movie };
 
     return (
         <div className={'addEditContainer' + (isVisible ? ' visible' : '')}>
             <div className="addEditModal">
-                <button className="close" onClick={() => closeModal()}>X</button>
-                <div className="header">{isEditMode ? 'edit' : 'add'} movie</div>
-                <div className="body">
-                    {isEditMode ? (<label> movie id
-                        <input type="text" name="id" defaultValue={movie.id} disabled="disabled" />
-                    </label>) : ''}
-                    <label> title
-                        <input type="text" name="title" value={movie.title} onChange={handleChange} />
-                    </label>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={signupSchema}
+                    onSubmit={(values) => {
+                        isEditMode ? editMovie(values) : addMovie(values);
+                    }}>
+                    {({ resetForm }) => (
+                        <>
+                            <button className="close" onClick={() => { closeAndReset(resetForm) }}>X</button>
+                            <div className="header">{isEditMode ? 'edit' : 'add'} movie</div>
+                            <Form>
+                                <div className="body">
+                                    {isEditMode ? (<label> movie id
+                                        <input type="text" name="id" defaultValue={movie.id} disabled="disabled" />
+                                    </label>) : ''}
+                                    <label> title
+                                <Field type="text" name="title"></Field>
+                                    </label>
+                                    <ErrorMessage name="title" component="div" />
 
-                    <label> release date
-                        <input type="text" name="release_date" value={movie.release_date} onChange={handleChange} />
-                    </label>
+                                    <label> release date
+                                <Field type="text" name="release_date"></Field>
+                                    </label>
+                                    <ErrorMessage name="release_date" component="div" />
 
-                    <label> movie url
-                        <input type="text" name="poster_path" value={movie.poster_path} onChange={handleChange} />
-                    </label>
+                                    <label> movie url
+                                <Field type="text" name="poster_path"></Field>
+                                    </label>
+                                    <ErrorMessage name="poster_path" component="div" />
 
-                    <label> genre
-                        <select multiple="multiple" size="1" name="genres" value={movie.genres} onChange={handleChange}>
-                            {genres.map((genre) => {
-                                return <option key={genre} value={genre}>{genre}</option>
-                            }
-                            )}
-                        </select>
-                    </label>
+                                    <label> genre
+                                <Field as="select" size="1" name="genres" multiple="multiple">
+                                            {genres.map((genre) => {
+                                                return <option key={genre} value={genre}>{genre}</option>
+                                            })}
+                                        </Field>
+                                    </label>
+                                    <ErrorMessage name="genres" component="div" />
 
-                    <label> overview
-                        <input type="text" name="overview" value={movie.overview} onChange={handleChange} />
-                    </label>
+                                    <label> overview
+                                <Field type="text" name="overview" />
+                                    </label>
+                                    <ErrorMessage name="overview" component="div" />
 
-                    <label> runtime
-                        <input type="number" name="runtime" value={movie.runtime} onChange={handleChange} />
-                    </label>
-                </div>
-                <div className="buttons">
-                    <button className="reset" onClick={() => reset()}>reset</button>
-                    <button className="confirm" onClick={() => submit()}>{isEditMode ? 'save' : 'submit'}</button>
-                </div>
-
+                                    <label> runtime
+                                <Field type="number" name="runtime" />
+                                    </label>
+                                    <ErrorMessage name="runtime" component="div" />
+                                </div>
+                                <div className="buttons">
+                                    <button className="reset" type="reset" onClick={() => resetForm(initialValues)}>reset</button>
+                                    <button className="confirm" type="submit">{isEditMode ? 'save' : 'submit'}</button>
+                                </div>
+                            </Form>
+                        </>
+                    )}
+                </Formik>
             </div>
         </div>
     );
@@ -111,16 +123,13 @@ AddEditModal.propTypes = {
 
 const mapStateToProps = state => {
     const movie = getMovieToEdit(state);
-    const initialMovie = getInitialMovie(state);
 
-    return { movie, initialMovie }
+    return { movie }
 };
 
 const mapDispatchToProps = dispatch => ({
-    movieValueChanged: (name, value, isArray = false) => dispatch(movieValueChanged(name, value, isArray)),
     addMovie: (movie) => dispatch(addMovie(movie)),
-    editMovie: (movie) => dispatch(editMovie(movie)),
-    resetMovie: (movie) => dispatch(resetMovie(movie))
+    editMovie: (movie) => dispatch(editMovie(movie))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditModal);

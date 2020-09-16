@@ -19,7 +19,7 @@ const MovieSearch = (props) => {
                 <input className="searchInput" type="text" placeholder="What do you want to watch?"></input>
                 <button className="searchButton">Search</button>
             </form>
-            <AddEditModal isVisible={props.addModalVisible} movie={{}} closeModal={() => props.closeModal()}  />
+            <AddEditModal isVisible={props.addModalVisible} closeModal={() => props.closeModal()}  />
         </div>
     );
 };

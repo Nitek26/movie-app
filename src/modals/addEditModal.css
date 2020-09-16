@@ -33,6 +33,10 @@
     align-self: flex-end;
 }
 
+.addEditContainer .addEditModal form {
+    width: 100%;
+}
+
 .addEditContainer .addEditModal .header {
     font-size: 2em;
     text-transform: uppercase;

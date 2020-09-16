@@ -14,8 +14,6 @@ export const getMovies = store => store.movieReducer.movies;
 
 export const getMovieToEdit = store => store.movieReducer.movieToEdit;
 
-export const getInitialMovie = store => store.movieReducer.initialMovie;
-
 export const getEditModalVisible = store => store.viewReducer.editModalVisible;
 
 export const getTotalMovies = store => store.movieReducer.totalMovies;
