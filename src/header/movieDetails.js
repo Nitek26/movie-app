@@ -5,9 +5,9 @@ import './movieDetails.css';
 const MovieDetails = (props) => {
     return (
         <div className="movieDetails">
-            <img src="logo.png" alt="Application logo"></img>
+            <img src="/logo.png" alt="Application logo"></img>
             <div className="searchButtonContainer">
-                <img src="search.png" alt="Search button" onClick={() => props.onSearchClicked()}></img>
+                <img src="/search.png" alt="Search button" onClick={() => props.onSearchClicked()}></img>
             </div>
             <div className="poster">
                 <img src={props.movie.poster_path} alt="movie poster" />

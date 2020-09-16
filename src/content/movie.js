@@ -22,7 +22,7 @@ const Movie = (props) => {
                 alt={`${props.movie.title} poster`}
                 onError={(e)=> {
                     e.target.onerror = null; 
-                    e.target.src='empty.png'
+                    e.target.src='/empty.png'
                 }} onClick={() => props.selectMovie(props.movie)}></img>
             <button className="actionButton" onClick={() => props.showOptions(props.movie.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>

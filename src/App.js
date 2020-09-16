@@ -15,20 +15,20 @@ import './App.css';
 function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovie, filter, sort, operationCounter }) {
 
   useEffect(() => {
-      startLoadingMovies(filter, sort);
+    startLoadingMovies(filter, sort);
   }, [startLoadingMovies, filter, sort, operationCounter]);
 
   return (
-    areMoviesLoading ?
-      <div className="loadingMessage">
+    <>
+      <div className={'loadingMessage ' + (areMoviesLoading ? 'visible' : '')}>
         Loading...
-    </div>
-      :
-      (<div className="app">
+      </div>
+      <div className="app">
         {selectedMovie ? <MovieDetails movie={selectedMovie} onSearchClicked={deselectMovie} /> : <MovieSearch />}
         <MovieContainer />
         <MovieFooter />
-      </div>));
+      </div>
+    </>);
 }
 
 const mapStateToProps = state => {
@@ -39,14 +39,14 @@ const mapStateToProps = state => {
   const filter = getFilterBy(state);
   const sort = getSortBy(state);
 
-  return { 
+  return {
     areMoviesLoading,
-    operationCounter, 
+    operationCounter,
     movies,
     selectedMovie,
     filter,
     sort
-   }
+  }
 };
 
 const mapDispatchToProps = dispatch => ({

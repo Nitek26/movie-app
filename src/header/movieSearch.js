@@ -10,7 +10,7 @@ import './movieSearch.css';
 const MovieSearch = (props) => {
     return (
         <div className="movieSearch">
-            <img src="logo.png" alt="Application logo"></img>
+            <img src="/logo.png" alt="Application logo"></img>
             <div className="addMovieContainer"><button onClick={() => props.openModal()}>+ Add movie</button></div>
             <div className="headerText">
                 Find your movie
