@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-
 
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
@@ -8,14 +7,15 @@ import Movie from './movie';
 import DeleteConfirmation from '../modals/deleteConfirmation';
 import AddEditModal from '../modals/addEditModal';
 
-import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor, getEditModalVisible } from '../store/selectors'
+import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor, getEditModalVisible, getAreMoviesLoading, getOperationCounter } from '../store/selectors'
 import { setFilter, setSort, showOptions, hideOptions, setDeleteModalVisbility, setEditModalVisbility } from '../store/actions';
-import { deleteMovie } from '../store/thunks';
+import { loadMovies, deleteMovie } from '../store/thunks';
 
 import './movieContainer.css';
 
 const MovieContainer = ({
     movies,
+    areMoviesLoading,
     filter,
     sort,
     setFilter,
@@ -30,8 +30,15 @@ const MovieContainer = ({
     deleteMovie,
     showEditModal,
     closeEditModal,
-    editModalVisible
+    editModalVisible,
+    startLoadingMovies, 
+    operationCounter
 }) => {
+
+    useEffect(() => {
+        startLoadingMovies(filter, sort);
+      }, [startLoadingMovies, filter, sort, operationCounter]);
+
     let modal = ''
     if (editModalVisible) {
         modal = <AddEditModal isVisible={editModalVisible} closeModal={closeEditModal} />
@@ -39,6 +46,9 @@ const MovieContainer = ({
 
     return (
         <>
+            <div className={'loadingMessage ' + (areMoviesLoading ? 'visible' : '')}>
+                Loading...
+            </div>
             <div className="movieContainer">
                 <div className="filters">
                     <CategoryFilter filter={filter} setCategoryFilter={setFilter} />
@@ -88,8 +98,10 @@ const mapStateToProps = state => {
     const optionsOpenFor = getOptionsOpenedFor(state);
     const deleteConfirmationOpenedFor = getDeleteConfirmationOpenedFor(state);
     const editModalVisible = getEditModalVisible(state);
+    const areMoviesLoading = getAreMoviesLoading(state);
+    const operationCounter = getOperationCounter(state);
 
-    return { movies, filter, sort, totalMovies, optionsOpenFor, deleteConfirmationOpenedFor, editModalVisible }
+    return { movies, filter, sort, totalMovies, optionsOpenFor, deleteConfirmationOpenedFor, editModalVisible, areMoviesLoading, operationCounter }
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -102,6 +114,7 @@ const mapDispatchToProps = dispatch => ({
     deleteMovie: (id) => dispatch(deleteMovie(id)),
     showEditModal: (movie) => dispatch(setEditModalVisbility(movie)),
     closeEditModal: () => dispatch(setEditModalVisbility()),
+    startLoadingMovies: (filter, sort) => dispatch(loadMovies(filter, sort))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer);

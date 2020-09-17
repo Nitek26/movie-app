@@ -6,10 +6,10 @@ import {
     getMovieCompleted
 } from './actions';
 
-export const loadMovies = (filter, sort) => async (dispatch) => {
+export const loadMovies = (filter, sort, searchTerm) => async (dispatch) => {
     try {
         dispatch(loadMoviesInProgress());
-        let url = `http://localhost:4000/movies?limit=12&sortBy=${sort}&sortOrder=asc`;
+        let url = `http://localhost:4000/movies?limit=12&sortBy=${sort}&sortOrder=asc&search=${searchTerm}`;
         if(filter !== 'all'){
             url = url + `&filter=${filter}`;
         }
