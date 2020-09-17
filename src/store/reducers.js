@@ -18,18 +18,6 @@ const viewReducer = (state = {}, action) => {
                 deleteConfirmationOpenedFor: id
             };
         }
-        case ACTIONS.SELECT_MOVIE: {
-            return {
-                ...state,
-                selectedMovie: action.payload.movie
-            }
-        }
-        case ACTIONS.DESELECT_MOVIE: {
-            return {
-                ...state,
-                selectedMovie: undefined
-            }
-        }
         case ACTIONS.SHOW_OPTIONS: {
             return {
                 ...state,
@@ -84,6 +72,12 @@ const movieReducer = (state = {}, action) => {
                 ...state,
                 areMoviesLoading: false
             };
+        }
+        case ACTIONS.GET_MOVIE_COMPLETED: {
+            return {
+                ...state,
+                selectedMovie: action.payload.movie
+            }
         }
         case ACTIONS.SET_FILTER: {
             return {

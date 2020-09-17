@@ -2,7 +2,8 @@ import {
     loadMoviesInProgress, 
     loadMoviesSuccess, 
     loadMoviesFailure,
-    moviesChanged
+    moviesChanged,
+    getMovieCompleted
 } from './actions';
 
 export const loadMovies = (filter, sort) => async (dispatch) => {
@@ -18,6 +19,26 @@ export const loadMovies = (filter, sort) => async (dispatch) => {
         dispatch(loadMoviesSuccess(movies));
     } catch (error) {
         dispatch(loadMoviesFailure());
+        alert('Error');
+    }
+};
+
+export const getMovie = (id) => async (dispatch) => {
+    try {
+        let url = `http://localhost:4000/movies/${id}`;
+        const response =  await fetch(url, {
+            method: 'GET'
+        });
+    
+        if(response.status === 200) {
+            const movie =  await response.json();
+            dispatch(getMovieCompleted(movie));
+            return;
+        }
+
+        alert('Error');
+                
+    } catch (error) {
         alert('Error');
     }
 };

@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
+
 import './movie.css';
 
 const Movie = (props) => {
@@ -17,13 +19,15 @@ const Movie = (props) => {
 
     return (
         <div className="movie">
-            <img 
-                src={props.movie.poster_path} 
-                alt={`${props.movie.title} poster`}
-                onError={(e)=> {
-                    e.target.onerror = null; 
-                    e.target.src='/empty.png'
-                }} onClick={() => props.selectMovie(props.movie)}></img>
+            <Link to={`/film/${props.movie.id}`}>
+                <img 
+                    src={props.movie.poster_path} 
+                    alt={`${props.movie.title} poster`}
+                    onError={(e)=> {
+                        e.target.onerror = null; 
+                        e.target.src='/empty.png'
+                    }} onClick={() => props.selectMovie(props.movie)}></img>
+            </Link>
             <button className="actionButton" onClick={() => props.showOptions(props.movie.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>
                 <span className="close" onClick={() => props.hideOptions()}>X</span>

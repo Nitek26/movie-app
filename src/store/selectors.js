@@ -1,12 +1,12 @@
 export const getAddModalVisbility = store => store.viewReducer.addModalVisible;
 
-export const getSelectedMovie = store => store.viewReducer.selectedMovie;
-
 export const getOptionsOpenedFor = store => store.viewReducer.optionsOpenedFor;
 
 export const getDeleteConfirmationOpenedFor = store => store.viewReducer.deleteConfirmationOpenedFor;
 
 export const getAreMoviesLoading = store => store.movieReducer.areMoviesLoading;
+
+export const getSelectedMovie = store => store.movieReducer.selectedMovie;
 
 export const getOperationCounter = store => store.movieReducer.operationCounter;
 
@@ -21,3 +21,5 @@ export const getTotalMovies = store => store.movieReducer.totalMovies;
 export const getFilterBy = store => store.movieReducer.filterBy;
 
 export const getSortBy = store => store.movieReducer.sortBy;
+
+export const getSearchTerm = store => store.movieReducer.searchTerm;

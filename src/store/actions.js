@@ -15,15 +15,8 @@ export const loadMoviesFailure = () => ({
     type: ACTIONS.LOAD_MOVIES_FAILURE
 });
 
-export const deleteMovie = (id) => ({
-    type: ACTIONS.DELETE_MOVIE,
-    payload:{
-        id
-    }
-});
-
-export const addMovie = (movie) => ({
-    type: ACTIONS.ADD_MOVIE,
+export const getMovieCompleted = movie => ({
+    type: ACTIONS.GET_MOVIE_COMPLETED,
     payload:{
         movie
     }

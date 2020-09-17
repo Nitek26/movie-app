@@ -7,7 +7,6 @@ const initialState = {
     viewReducer: {
         addModalVisible: false,
         editModalVisible: false,
-        selectedMovie: undefined,
         optionsOpenedFor: 0,
         deleteConfirmationOpenedFor: 0
     },
@@ -18,6 +17,7 @@ const initialState = {
         totalMovies: 0,
         filterBy: 'all',
         sortBy: 'release_date',
+        selectedMovie: undefined,
         movieToEdit: {
             title: '',
             tagline: 'New movie',

@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 
 import MovieContainer from './content/movieContainer';
 import MovieFooter from './footer/movieFooter';
@@ -24,9 +26,18 @@ function App({ startLoadingMovies, areMoviesLoading, deselectMovie, selectedMovi
         Loading...
       </div>
       <div className="app">
-        {selectedMovie ? <MovieDetails movie={selectedMovie} onSearchClicked={deselectMovie} /> : <MovieSearch />}
-        <MovieContainer />
-        <MovieFooter />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <MovieSearch />
+            </Route>
+            <Route path="/film/:id">
+              <MovieDetails />
+            </Route>
+          </Switch>
+          <MovieContainer />
+          <MovieFooter />
+        </Router>
       </div>
     </>);
 }
