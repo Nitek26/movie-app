@@ -1,0 +1,26 @@
+.notFoundContainer {
+    background-color: #232323;
+    padding: 0 40px 10px 40px;
+    display: grid;
+}
+
+.notFoundContainer span {
+    color: white;
+    display: block;
+    margin: 0 auto;
+    font-size: 3em;
+}
+
+.notFoundContainer a {
+    background-color: #232323;
+    border: 1px #F65261 solid;
+    border-radius: 4px;
+    color: #F65261;
+    font-size: 1.5em;
+    padding: 20px 50px;
+    text-transform: uppercase;
+    margin: 100px auto;
+    text-align: center;
+    cursor: pointer;
+    width: 300px;
+}

@@ -36,8 +36,13 @@ export const getMovie = (id) => async (dispatch) => {
             return;
         }
 
+        if(response.status === 404) {
+            window.location.pathname = "/404";
+            return;
+        }
+
         alert('Error');
-                
+
     } catch (error) {
         alert('Error');
     }

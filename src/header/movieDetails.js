@@ -14,7 +14,7 @@ const MovieDetails = ({ movie, getMovie }) => {
         if (!movie || movie.id !== parseInt(id, 10)) {
             getMovie(id);
         }
-    }, [id]);
+    }, [id, movie, getMovie]);
 
     return (
         <div className="movieDetails">

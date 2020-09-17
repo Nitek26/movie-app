@@ -9,29 +9,28 @@ import DeleteConfirmation from '../modals/deleteConfirmation';
 import AddEditModal from '../modals/addEditModal';
 
 import { getMovies, getFilterBy, getSortBy, getTotalMovies, getOptionsOpenedFor, getDeleteConfirmationOpenedFor, getEditModalVisible } from '../store/selectors'
-import { setFilter, setSort, selectMovie, showOptions, hideOptions, setDeleteModalVisbility, setEditModalVisbility } from '../store/actions';
+import { setFilter, setSort, showOptions, hideOptions, setDeleteModalVisbility, setEditModalVisbility } from '../store/actions';
 import { deleteMovie } from '../store/thunks';
 
 import './movieContainer.css';
 
-const MovieContainer = ({ 
-    movies, 
-    filter, 
-    sort, 
-    selectMovie, 
-    setFilter, 
-    setSort, 
-    totalMovies, 
-    showOptions, 
-    hideOptions, 
-    optionsOpenFor, 
+const MovieContainer = ({
+    movies,
+    filter,
+    sort,
+    setFilter,
+    setSort,
+    totalMovies,
+    showOptions,
+    hideOptions,
+    optionsOpenFor,
     deleteConfirmationOpenedFor,
-    showDeleteConfirmModal, 
+    showDeleteConfirmModal,
     hideDeleteConfirmModal,
     deleteMovie,
-    showEditModal, 
+    showEditModal,
     closeEditModal,
-    editModalVisible 
+    editModalVisible
 }) => {
     let modal = ''
     if (editModalVisible) {
@@ -45,31 +44,37 @@ const MovieContainer = ({
                     <CategoryFilter filter={filter} setCategoryFilter={setFilter} />
                     <SearchSorter sortBy={sort} setSortBy={setSort} />
                 </div>
-                <div className="searchCount">
-                    <span>{totalMovies}</span> movies found
-                </div>
-                <div className="searchResults">
-                    {movies.map(movie => {
-                        return (
-                            <Movie
-                                key={movie.id}
-                                movie={movie}
-                                showOptions={showOptions}
-                                hideOptions={hideOptions}
-                                modalOpened={optionsOpenFor === movie.id}
-                                deleteMovie={showDeleteConfirmModal}
-                                showEditModal={showEditModal}
-                                selectMovie={selectMovie} />
-                        );
-                    })}
-                </div>
+                {
+                    movies.length > 0
+                        ? (
+                            <>
+                                <div className="searchCount">
+                                    <span>{totalMovies}</span> movies found
+                                </div>
+                                <div className="searchResults">
+                                    {movies.map(movie => {
+                                        return (
+                                            <Movie
+                                                key={movie.id}
+                                                movie={movie}
+                                                showOptions={showOptions}
+                                                hideOptions={hideOptions}
+                                                modalOpened={optionsOpenFor === movie.id}
+                                                deleteMovie={showDeleteConfirmModal}
+                                                showEditModal={showEditModal}/>
+                                        );
+                                    })}
+                                </div>
+                            </>)
+                        : <span>No movies found</span>
+                }
             </div>
-            <DeleteConfirmation 
-                isVisible={!!deleteConfirmationOpenedFor} 
-                movieToDelete={deleteConfirmationOpenedFor} 
+            <DeleteConfirmation
+                isVisible={!!deleteConfirmationOpenedFor}
+                movieToDelete={deleteConfirmationOpenedFor}
                 hideDeleteConfirmModal={hideDeleteConfirmModal}
                 deleteMovie={deleteMovie}
-                 />
+            />
             {modal}
         </>
     );
@@ -88,7 +93,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    selectMovie: (movie) => dispatch(selectMovie(movie)),
     setFilter: filter => dispatch(setFilter(filter)),
     setSort: sort => dispatch(setSort(sort)),
     showOptions: id => dispatch(showOptions(id)),

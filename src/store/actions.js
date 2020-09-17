@@ -61,17 +61,6 @@ export const setDeleteModalVisbility = (id) => ({
     }
 });
 
-export const selectMovie = (movie) => ({
-    type: ACTIONS.SELECT_MOVIE,
-    payload:{
-        movie
-    }
-});
-
-export const deselectMovie = () => ({
-    type: ACTIONS.DESELECT_MOVIE
-});
-
 export const showOptions = (id) => ({
     type: ACTIONS.SHOW_OPTIONS,
     payload:{

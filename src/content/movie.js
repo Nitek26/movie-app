@@ -26,7 +26,7 @@ const Movie = (props) => {
                     onError={(e)=> {
                         e.target.onerror = null; 
                         e.target.src='/empty.png'
-                    }} onClick={() => props.selectMovie(props.movie)}></img>
+                    }}></img>
             </Link>
             <button className="actionButton" onClick={() => props.showOptions(props.movie.id)}>...</button>
             <div className={"actions " + (props.modalOpened ? "opened" : null)}>

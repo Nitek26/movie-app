@@ -20,7 +20,7 @@
     cursor: pointer;
 }
 
-.movie img:hover + .actionButton {
+.movie a:hover + .actionButton {
     display: initial;
 }
 
