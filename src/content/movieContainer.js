@@ -66,7 +66,7 @@ const MovieContainer = ({
                                     })}
                                 </div>
                             </>)
-                        : <span>No movies found</span>
+                        : <div className="noResults">No movies found</div>
                 }
             </div>
             <DeleteConfirmation

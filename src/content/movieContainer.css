@@ -1,6 +1,7 @@
 .movieContainer {
     background-color: #232323;
     padding: 0 40px 10px 40px;
+    display: grid;
 }
 
 .movieContainer .filters {
@@ -24,4 +25,10 @@
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(200px, auto);
     gap: 10px;
+}
+
+.movieContainer .noResults {
+    color: white;
+    font-size: 3em;
+    margin: 100px auto;
 }
