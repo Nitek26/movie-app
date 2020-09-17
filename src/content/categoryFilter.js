@@ -11,10 +11,16 @@ const CategoryFilter = (props) => {
         'crime'
     ];
 
+    const filterMovies = (option) => {
+        if(!props.disabled){
+            props.setCategoryFilter(option);
+        }
+    }
+
     return (
-        <div className="categoryFilter">
+        <div className={"categoryFilter " + (props.disabled ? "disabled" : "")}>
             {options.map(option => {
-                return <div key={option} onClick={() => props.setCategoryFilter(option)} className={props.filter === option ? 'selected' : null}>{option}</div>
+                return <div key={option} onClick={() => filterMovies(option)} className={props.filter === option ? 'selected' : null}>{option}</div>
             })}
         </div>
     );

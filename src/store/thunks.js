@@ -9,7 +9,7 @@ import {
 export const loadMovies = (filter, sort, searchTerm) => async (dispatch) => {
     try {
         dispatch(loadMoviesInProgress());
-        let url = `http://localhost:4000/movies?limit=12&sortBy=${sort}&sortOrder=asc&search=${searchTerm}`;
+        let url = `http://localhost:4000/movies?limit=12&sortBy=${sort}&sortOrder=asc&search=${searchTerm}&searchBy=title`;
         if(filter !== 'all'){
             url = url + `&filter=${filter}`;
         }

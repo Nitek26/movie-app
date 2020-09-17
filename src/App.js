@@ -20,14 +20,17 @@ function App() {
               <MovieContainer />
               <MovieFooter />
             </Route>
+            <Route path="/search/:searchTerm">
+              <MovieSearch />
+              <MovieContainer />
+              <MovieFooter />
+            </Route>
             <Route path="/film/:id">
               <MovieDetails />
               <MovieContainer />
               <MovieFooter />
             </Route>
-            <Route path="/404" component={NotFound}>
-              <NotFound />
-            </Route>
+            <Route path="/404" component={NotFound} />
             <Route component={NotFound} />
           </Switch>
         </Router>

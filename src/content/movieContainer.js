@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams, useLocation } from "react-router-dom";
 
 import CategoryFilter from './categoryFilter';
 import SearchSorter from './searchSorter';
@@ -31,13 +32,18 @@ const MovieContainer = ({
     showEditModal,
     closeEditModal,
     editModalVisible,
-    startLoadingMovies, 
+    startLoadingMovies,
     operationCounter
 }) => {
 
+    let { searchTerm } = useParams();
+    let location = useLocation();
+
     useEffect(() => {
-        startLoadingMovies(filter, sort);
-      }, [startLoadingMovies, filter, sort, operationCounter]);
+        if (searchTerm || location.pathname === '/') {
+            startLoadingMovies(filter, sort, searchTerm);
+        } 
+    }, [startLoadingMovies, filter, sort, searchTerm, operationCounter, location]);
 
     let modal = ''
     if (editModalVisible) {
@@ -51,8 +57,8 @@ const MovieContainer = ({
             </div>
             <div className="movieContainer">
                 <div className="filters">
-                    <CategoryFilter filter={filter} setCategoryFilter={setFilter} />
-                    <SearchSorter sortBy={sort} setSortBy={setSort} />
+                    <CategoryFilter filter={filter} setCategoryFilter={setFilter} disabled={!searchTerm} />
+                    <SearchSorter sortBy={sort} setSortBy={setSort} disabled={!searchTerm} />
                 </div>
                 {
                     movies.length > 0
@@ -71,7 +77,7 @@ const MovieContainer = ({
                                                 hideOptions={hideOptions}
                                                 modalOpened={optionsOpenFor === movie.id}
                                                 deleteMovie={showDeleteConfirmModal}
-                                                showEditModal={showEditModal}/>
+                                                showEditModal={showEditModal} />
                                         );
                                     })}
                                 </div>
@@ -114,7 +120,7 @@ const mapDispatchToProps = dispatch => ({
     deleteMovie: (id) => dispatch(deleteMovie(id)),
     showEditModal: (movie) => dispatch(setEditModalVisbility(movie)),
     closeEditModal: () => dispatch(setEditModalVisbility()),
-    startLoadingMovies: (filter, sort) => dispatch(loadMovies(filter, sort))
+    startLoadingMovies: (filter, sort, searchTerm) => dispatch(loadMovies(filter, sort, searchTerm))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer);

@@ -12,6 +12,15 @@
     padding-top: 10px;
 }
 
+.categoryFilter.disabled div {
+    display: flex;
+    color: gray;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    cursor: default;
+    padding-top: 10px;
+}
+
 .categoryFilter div.selected {
     border-bottom: 5px  #F65261 solid;
 }

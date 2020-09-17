@@ -85,6 +85,12 @@ const movieReducer = (state = {}, action) => {
                 filterBy: action.payload.filterBy
             };
         }
+        case ACTIONS.SET_SEARCH_TERM: {
+            return {
+                ...state,
+                searchTerm: action.payload.searchTerm
+            };
+        }
         case ACTIONS.SET_SORT: {
             return {
                 ...state,

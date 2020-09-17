@@ -13,7 +13,7 @@ const SearchSorter = (props) => {
     return (
         <div className="searchSorter">
             <div>Sort by</div>
-            <select onChange={(event) => props.setSortBy(event.target.value)} value={props.sortBy}>
+            <select onChange={(event) => props.setSortBy(event.target.value)} value={props.sortBy} disabled={props.disabled}>
                 {options.map(option => {
                     return <option key={option.value} value={option.value}>{option.title}</option>
                 })}

@@ -21,5 +21,3 @@ export const getTotalMovies = store => store.movieReducer.totalMovies;
 export const getFilterBy = store => store.movieReducer.filterBy;
 
 export const getSortBy = store => store.movieReducer.sortBy;
-
-export const getSearchTerm = store => store.movieReducer.searchTerm;
