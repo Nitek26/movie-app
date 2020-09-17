@@ -40,9 +40,7 @@ const MovieContainer = ({
     let location = useLocation();
 
     useEffect(() => {
-        if (searchTerm || location.pathname === '/') {
             startLoadingMovies(filter, sort, searchTerm);
-        } 
     }, [startLoadingMovies, filter, sort, searchTerm, operationCounter, location]);
 
     let modal = ''
